@@ -17,6 +17,8 @@ public class Main extends MovieClip {
     public function Main() {
         stage.align = StageAlign.TOP_LEFT;
         stage.scaleMode = StageScaleMode.NO_SCALE;
+        stage.nativeWindow.width = 1024;
+        stage.nativeWindow.height = 768;
 
         if( loaderInfo.bytesLoaded != loaderInfo.bytesTotal ){
             this.loaderInfo.addEventListener( ProgressEvent.PROGRESS, progressHandler  );
