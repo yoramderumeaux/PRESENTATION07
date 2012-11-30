@@ -1,7 +1,7 @@
 package be.devine.cp3.presentation07 {
-import be.devine.cp3.presentation07.VO.diaVO;
-import be.devine.cp3.presentation07.VO.imageVO;
-import be.devine.cp3.presentation07.VO.tekstVO;
+import be.devine.cp3.presentation07.VO.DiaVO;
+import be.devine.cp3.presentation07.VO.ImageVO;
+import be.devine.cp3.presentation07.VO.TekstVO;
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
@@ -41,17 +41,17 @@ public class Application extends Sprite{
             trace("/// " + diaNode.@number + " ///");
 
             for each(var textNode:XML in diaNode.text){
-                var tekst:tekstVO = new tekstVO(textNode, textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
+                var tekst:TekstVO = new TekstVO(textNode, textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
                 tekstArray.push(tekst);
             }
 
             for each(var imageNode:XML in diaNode.image){
-                var images:imageVO = new imageVO(imageNode.@width, imageNode.@height, imageNode.@xpos, imageNode.@ypos, imageNode.@index, imageNode);
+                var images:ImageVO = new ImageVO(imageNode.@width, imageNode.@height, imageNode.@xpos, imageNode.@ypos, imageNode.@index, imageNode);
                 imageArray.push(images);
             }
 
             //trace('testje ophalen data' + tekstArray[0].xpos);
-            var dias:diaVO = new diaVO(diaNode.backgroundImage, tekstArray, imageArray);
+            var dias:DiaVO = new DiaVO(diaNode.backgroundImage, tekstArray, imageArray);
             diasArray.push(dias);
 
         }

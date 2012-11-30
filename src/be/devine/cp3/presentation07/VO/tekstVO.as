@@ -1,5 +1,5 @@
 package be.devine.cp3.presentation07.VO {
-public class tekstVO {
+public class TekstVO {
     //PROPERTIES
     public var tekst:String = '';
     public var fontSize:int = 0;
@@ -10,7 +10,7 @@ public class tekstVO {
     public var verticalCenter:Boolean = false;
 
     //CONSTRUCTOR
-    public function tekstVO(tekst:String, fontSize:int, xpos:uint, ypos:uint, index:int, horizontalCenter:Boolean, verticalCenter:Boolean) {
+    public function TekstVO(tekst:String, fontSize:int, xpos:uint, ypos:uint, index:int, horizontalCenter:Boolean, verticalCenter:Boolean) {
 
         this.tekst = tekst;
         this.fontSize = fontSize;
