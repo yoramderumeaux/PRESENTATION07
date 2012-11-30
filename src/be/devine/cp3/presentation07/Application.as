@@ -17,6 +17,22 @@ public class Application extends Sprite{
 
     //CONSTRUCTOR
     public function Application(){
+
+        var foto:Foto = new Foto();
+        addChild(foto);
+        var foto2:Foto2 = new Foto2();
+        addChild(foto2);
+        var foto3:Foto3 = new Foto3();
+        addChild(foto3);
+
+        var background:Sprite = new Sprite();
+        background.graphics.beginFill(0x66b34e);
+        background.graphics.drawRect(0, 0, 1024, 768);
+        background.graphics.endFill();
+        addChild(background);
+
+
+
         trace('[APPLICATION] loaded after pre-loading');
 
         appModel = AppModel.getInstance();
@@ -52,6 +68,7 @@ public class Application extends Sprite{
 
             //trace('testje ophalen data' + tekstArray[0].xpos);
             var dias:DiaVO = new DiaVO(diaNode.backgroundImage, tekstArray, imageArray);
+
             diasArray.push(dias);
 
         }
