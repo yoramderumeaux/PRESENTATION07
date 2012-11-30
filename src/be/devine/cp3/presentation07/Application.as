@@ -5,15 +5,27 @@ import be.devine.cp3.presentation07.VO.TekstVO;
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
+import be.devine.cp3.presentation07.view.MenuView;
 
-import flash.display.Sprite;
 import flash.events.Event;
 
-public class Application extends Sprite{
+import starling.display.Sprite;
+
+public class Application extends starling.display.Sprite{
     //PROPERTIES
     private var appModel:AppModel;
+    private var menuView:MenuView;
 
     private var xmlQueue:Queue;
+
+    [Embed(source="../../../../assets/spriteSheets/uiElements.xml", mimeType="application/octet-stream")]
+    public static const uiXml:Class;
+    [Embed(source="../../../../assets/spriteSheets/uiElements.png")]
+    public static const uiTexture:Class;
+    [Embed(source="../../../../assets/fonts/Abel-Regular.ttf", embedAsCFF="false", fontFamily="Abel")]
+    private static const Abel:Class;
+    [Embed(source="../../../../assets/fonts/Helvetica.ttf", embedAsCFF="false", fontFamily="Helvetica")]
+    private static const Helvetica:Class;
 
     //CONSTRUCTOR
     public function Application(){
@@ -22,6 +34,10 @@ public class Application extends Sprite{
 
         appModel = AppModel.getInstance();
 
+        menuView = new MenuView();
+        addChild(menuView);
+
+        //initieel ophalen van de xml
         xmlQueue = new Queue();
         xmlQueue.Add(new URLLoaderTask("assets/xml/testDia.xml"));
         xmlQueue.addEventListener(Event.COMPLETE, xmlLoadedHandler);
