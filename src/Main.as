@@ -12,7 +12,7 @@ import flash.utils.getDefinitionByName;
 public class Main extends MovieClip {
     //PROPERTIES
     private var _app:DisplayObject;
-    private var percentage:PercentagePreloader;
+    //private var percentage:PercentagePreloader;
 
 
     //CONSTRUCTOR
@@ -22,15 +22,15 @@ public class Main extends MovieClip {
         stage.nativeWindow.width = 1024;
         stage.nativeWindow.height = 768;
 
-        var background:Sprite = new Sprite();
+        /*var background:Sprite = new Sprite();
         background.graphics.beginFill(0x66b34e);
         background.graphics.drawRect(0, 0,  stage.nativeWindow.width,  stage.nativeWindow.height);
         background.graphics.endFill();
-        addChild(background);
+        addChild(background);    */
 
-        percentage = new PercentagePreloader();
-        percentage.stop();
-        addChild(percentage);
+        //percentage = new PercentagePreloader();
+        //percentage.stop();
+        //addChild(percentage);
 
 
         if( loaderInfo.bytesLoaded != loaderInfo.bytesTotal ){
@@ -46,7 +46,7 @@ public class Main extends MovieClip {
     private function progressHandler( e:ProgressEvent ):void {
         //trace(e.bytesLoaded, e.bytesTotal);
         var p:int =  (e.bytesLoaded / e.bytesTotal) * 100;
-        percentage.gotoAndStop(p);
+        //percentage.gotoAndStop(p);
         trace ("[MAIN]Percentage p: " + p);
 
 
