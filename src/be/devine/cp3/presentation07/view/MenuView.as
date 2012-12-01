@@ -42,6 +42,7 @@ public class MenuView extends Sprite{
         titelImage.y = (85 >> 1) - (titelImage.height >> 1);
         container.addChild(titelImage);
 
+        //buttons aanmaken
         newXmlButton = new Button(atlas.getTexture('newXml'));
         newXmlButton.x = 121;
         newXmlButton.y = 29;
@@ -62,6 +63,7 @@ public class MenuView extends Sprite{
 
         //bij resize gewoon de container in het midden zetten... ook groene band mee resizen.
         addChild(container);
+
     }
 
     private function onTouchNew(event:TouchEvent):void{
@@ -69,9 +71,9 @@ public class MenuView extends Sprite{
             ballonImage.x = (newXmlButton.x + (newXmlButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (newXmlButton.y + newXmlButton.height) + 5;
             addChild(ballonImage);
-            infoTekst.text = "Load a new local dia";
+            infoTekst.text = "Load a new presentation";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
-            infoTekst.y = ballonImage.y + 8 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
+            infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
             addChild(infoTekst);
         }else{
             removeChild(ballonImage);
@@ -90,7 +92,7 @@ public class MenuView extends Sprite{
             addChild(ballonImage);
             infoTekst.text = "Play from start";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
-            infoTekst.y = ballonImage.y + 8 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
+            infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
             addChild(infoTekst);
         }else{
             removeChild(ballonImage);
@@ -109,7 +111,7 @@ public class MenuView extends Sprite{
             addChild(ballonImage);
             infoTekst.text = "Play from selected dia";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
-            infoTekst.y = ballonImage.y + 8 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
+            infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
             addChild(infoTekst);
         }else{
             removeChild(ballonImage);

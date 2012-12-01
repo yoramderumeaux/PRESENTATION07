@@ -1,29 +1,24 @@
 package be.devine.cp3.presentation07.VO {
-public class TekstVO {
+public class BulletsVO {
     //PROPERTIES
-    public var tekst:String = '';
     public var fontName:String = '';
     public var fontSize:int = 0;
     public var xpos:uint = 0;
     public var ypos:uint = 0;
     public var color:String = '';
     public var index:int = 0;
-    public var horizontalCenter:Boolean = false;
-    public var verticalCenter:Boolean = false;
+    public var bullets:Array = new Array();
 
     //CONSTRUCTOR
-    public function TekstVO(tekst:String, fontName:String ,fontSize:int, xpos:uint, ypos:uint, color:String, index:int, horizontalCenter:Boolean, verticalCenter:Boolean) {
+    public function BulletsVO(bullets:Array, fontName:String, fontSize:int,  xpos:uint, ypos:uint, color:String, index:int) {
 
-        this.tekst = tekst;
+        this.bullets = bullets;
         this.fontName = fontName;
         this.fontSize = fontSize;
         this.xpos = xpos;
         this.ypos = ypos;
         this.color = color;
         this.index = index;
-        this.horizontalCenter = horizontalCenter;
-        this.verticalCenter = verticalCenter;
-
     }
 }
 }

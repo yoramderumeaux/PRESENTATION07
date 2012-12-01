@@ -1,4 +1,5 @@
 package be.devine.cp3.presentation07 {
+import be.devine.cp3.presentation07.VO.BulletsVO;
 import be.devine.cp3.presentation07.VO.DiaVO;
 import be.devine.cp3.presentation07.VO.ImageVO;
 import be.devine.cp3.presentation07.VO.TekstVO;
@@ -6,6 +7,7 @@ import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
 import be.devine.cp3.presentation07.view.MenuView;
+import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
 
@@ -15,6 +17,7 @@ public class Application extends starling.display.Sprite{
     //PROPERTIES
     private var appModel:AppModel;
     private var menuView:MenuView;
+    private var thumbnailView:ThumbnailView;
 
     private var xmlQueue:Queue;
 
@@ -34,12 +37,16 @@ public class Application extends starling.display.Sprite{
 
         appModel = AppModel.getInstance();
 
+        thumbnailView = new ThumbnailView();
+        thumbnailView.y = 85;
+        addChild(thumbnailView);
+
         menuView = new MenuView();
         addChild(menuView);
 
         //initieel ophalen van de xml
         xmlQueue = new Queue();
-        xmlQueue.Add(new URLLoaderTask("assets/xml/testDia.xml"));
+        xmlQueue.Add(new URLLoaderTask("assets/xml/startPresentatie.xml"));
         xmlQueue.addEventListener(Event.COMPLETE, xmlLoadedHandler);
         xmlQueue.Start();
     }
@@ -54,11 +61,15 @@ public class Application extends starling.display.Sprite{
         for each(var diaNode:XML in diaXml.dia){
             var tekstArray:Array = new Array();
             var imageArray:Array = new Array();
+            //array voor alle bulletObjecten in dia
+            var bulletsArray:Array = new Array();
+            //array voor alle bulletItems in de BulletObjecten
+            var bulletsTextArray:Array = new Array();
 
             trace("/// " + diaNode.@number + " ///");
 
             for each(var textNode:XML in diaNode.text){
-                var tekst:TekstVO = new TekstVO(textNode, textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
+                var tekst:TekstVO = new TekstVO(textNode, textNode.@fontname,textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@color,textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
                 tekstArray.push(tekst);
             }
 
@@ -67,8 +78,16 @@ public class Application extends starling.display.Sprite{
                 imageArray.push(images);
             }
 
+            for each(var bulletsNode:XML in diaNode.bullets){
+                for each(var bulletTextNode:XML in bulletsNode.bullet){
+                    bulletsTextArray.push(bulletTextNode);
+                }
+                var bullets:BulletsVO = new BulletsVO(bulletsTextArray,bulletsNode.@fontname, bulletsNode.@fontsize, bulletsNode.@xpos, bulletsNode.@ypos, bulletsNode.@color, bulletsNode.@index);
+                bulletsArray.push(bullets);
+            }
+
             //trace('testje ophalen data' + tekstArray[0].xpos);
-            var dias:DiaVO = new DiaVO(diaNode.backgroundImage, tekstArray, imageArray);
+            var dias:DiaVO = new DiaVO(diaNode.backgroundColor, tekstArray, imageArray, bulletsArray);
 
             diasArray.push(dias);
 
