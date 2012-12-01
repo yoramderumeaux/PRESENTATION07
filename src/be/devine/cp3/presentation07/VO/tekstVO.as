@@ -8,11 +8,19 @@ public class TekstVO {
     public var ypos:uint = 0;
     public var color:String = '';
     public var index:int = 0;
-    public var horizontalCenter:Boolean = false;
-    public var verticalCenter:Boolean = false;
+    public var horizontalCenter:String = "";
+    public var verticalCenter:String = "";
 
     //CONSTRUCTOR
-    public function TekstVO(tekst:String, fontName:String ,fontSize:int, xpos:uint, ypos:uint, color:String, index:int, horizontalCenter:Boolean, verticalCenter:Boolean) {
+    public function TekstVO(tekst:String, fontName:String ,fontSize:int, xpos:uint, ypos:uint, color:String, index:int, horizontalCenter:String, verticalCenter:String) {
+
+        trace('------------------');
+        trace(tekst);
+        trace(xpos);
+        trace(ypos);
+        trace(horizontalCenter);
+        trace(verticalCenter);
+        trace('------------------');
 
         this.tekst = tekst;
         this.fontName = fontName;

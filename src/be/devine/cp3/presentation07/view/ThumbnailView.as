@@ -29,11 +29,20 @@ public class ThumbnailView extends Sprite{
         trace('[THUMBNAILVIEW]: xml loaded');
 
         var xpos:uint = 5;
+        var ypos:uint = 5;
+        var count:int = 0;
         for each(var dia:DiaVO in appModel.xmlDataArray){
-            var thumb:Thumbnail = new Thumbnail();
+            var thumb:Thumbnail = new Thumbnail(dia);
             thumb.x = xpos;
+            thumb.y = ypos;
             addChild(thumb);
-            xpos+=110;
+            xpos+=210;
+            count++;
+            if(count == 4){
+                ypos = 160;
+                xpos = 5;
+            }
+
         }
     }
 
