@@ -7,11 +7,18 @@ import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
 import be.devine.cp3.presentation07.view.MenuView;
+import be.devine.cp3.presentation07.view.PresentationView;
 import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
 
+import flash.events.TimerEvent;
+import flash.utils.Timer;
+
+import starling.display.Quad;
+
 import starling.display.Sprite;
+import starling.events.KeyboardEvent;
 
 public class Application extends starling.display.Sprite{
     //PROPERTIES
@@ -36,6 +43,7 @@ public class Application extends starling.display.Sprite{
         trace('[APPLICATION] ready for use');
 
         appModel = AppModel.getInstance();
+        appModel.addEventListener(AppModel.IS_FULLSCREEN, startPresentationHandler);
 
         thumbnailView = new ThumbnailView();
         thumbnailView.y = 85;
@@ -44,6 +52,7 @@ public class Application extends starling.display.Sprite{
         menuView = new MenuView();
         addChild(menuView);
 
+
         //initieel ophalen van de xml
         xmlQueue = new Queue();
         xmlQueue.Add(new URLLoaderTask("assets/xml/startPresentatie.xml"));
@@ -51,7 +60,31 @@ public class Application extends starling.display.Sprite{
         xmlQueue.Start();
     }
 
-    public function xmlLoadedHandler(event:Event):void{
+    private function startPresentationHandler(event:Event){
+        //tonen van presentatieView nadat de app fullscreen ging
+        trace('nu fullscreen');
+        var pre:PresentationView = new PresentationView();
+        stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
+        addChild(pre);
+    }
+
+    private function keyBoardHandler(event:starling.events.KeyboardEvent):void{
+        //keyboard events tijdens het presenteren
+        trace(event.keyCode);
+        switch (event.keyCode){
+            case 39:
+                    trace("right");
+                    appModel.currentDia++;
+                break;
+
+            case 37:
+                    trace("left");
+                    appModel.currentDia--;
+                break;
+        }
+    }
+
+    private function xmlLoadedHandler(event:Event):void{
         var xmlTask:URLLoaderTask = xmlQueue.completedTasks[0] as URLLoaderTask;
         var diaXml:XML = new XML(xmlTask.data);
 

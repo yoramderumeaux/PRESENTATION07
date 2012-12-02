@@ -1,5 +1,6 @@
 package be.devine.cp3.presentation07.view {
 import be.devine.cp3.presentation07.Application;
+import be.devine.cp3.presentation07.model.AppModel;
 
 import starling.display.Button;
 import starling.display.Image;
@@ -15,6 +16,8 @@ import starling.textures.TextureAtlas;
 
 public class MenuView extends Sprite{
     //PROPERTIES
+    private var appModel:AppModel;
+
     //atlas van spriteSheet aanmaken
     private var texture:Texture = Texture.fromBitmap(new Application.uiTexture());
     private var xml:XML = XML(new Application.uiXml());
@@ -31,6 +34,8 @@ public class MenuView extends Sprite{
     private var container:Sprite = new Sprite();
     //CONSTRUCTOR
     public function MenuView(){
+        this.appModel = AppModel.getInstance();
+
         //groene achtergrond maken
         var background:Quad = new Quad(1024,85,0x66b34e);
         addChild(background);
@@ -100,7 +105,8 @@ public class MenuView extends Sprite{
         }
 
         if(event.getTouch(this, TouchPhase.ENDED)){
-            // event dispatchen om nieuwe xml in te laden
+            appModel.isPlaying = true;
+            trace(appModel.isPlaying);
         }
     }
 
@@ -119,7 +125,7 @@ public class MenuView extends Sprite{
         }
 
         if(event.getTouch(this, TouchPhase.ENDED)){
-            // event dispatchen om nieuwe xml in te laden
+
         }
     }
 

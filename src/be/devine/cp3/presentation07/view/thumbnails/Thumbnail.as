@@ -41,8 +41,6 @@ public class Thumbnail extends Sprite{
 
         this.appModel = AppModel.getInstance();
 
-
-
         masker = new Quad(200,150,uint(dia.bgColor));
         addChild(masker);
 
