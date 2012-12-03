@@ -44,8 +44,8 @@
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
-        <image width = "300" height = "300" xpos = "65" ypos = "275" index = "3">assets/images/image1.jpg</image>
-        <image width = "300" height = "300" xpos = "420" ypos = "275" index = "4">assets/images/image2.jpg</image>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image1.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
         <transition>fade</transition>
     </dia>
 

@@ -18,7 +18,7 @@ public class BulletsGroup extends Sprite{
             tekstVeld.vAlign = VAlign.TOP;
             tekstVeld.y = yPos;
             addChild(tekstVeld);
-            yPos += 20;
+            yPos += fontSize + 10;
         }
     }
 }

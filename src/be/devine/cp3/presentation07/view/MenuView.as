@@ -2,6 +2,8 @@ package be.devine.cp3.presentation07.view {
 import be.devine.cp3.presentation07.Application;
 import be.devine.cp3.presentation07.model.AppModel;
 
+import flash.events.Event;
+
 import starling.display.Button;
 import starling.display.Image;
 
@@ -35,6 +37,8 @@ public class MenuView extends Sprite{
     //CONSTRUCTOR
     public function MenuView(){
         this.appModel = AppModel.getInstance();
+        //Knoppen pas activeren als de xml is ingeladen
+        appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
 
         //groene achtergrond maken
         var background:Quad = new Quad(1024,85,0x66b34e);
@@ -51,24 +55,27 @@ public class MenuView extends Sprite{
         newXmlButton = new Button(atlas.getTexture('newXml'));
         newXmlButton.x = 121;
         newXmlButton.y = 29;
-        newXmlButton.addEventListener(TouchEvent.TOUCH, onTouchNew);
         container.addChild(newXmlButton);
 
         playButton = new Button(atlas.getTexture('playFromStart'));
         playButton.x = 307;
         playButton.y = 29;
-        playButton.addEventListener(TouchEvent.TOUCH, onTouchPlay);
         container.addChild(playButton);
 
         playFromCurrentButton = new Button(atlas.getTexture('playFromCurrentDia_small'));
         playFromCurrentButton.x = 687;
         playFromCurrentButton.y = 29;
-        playFromCurrentButton.addEventListener(TouchEvent.TOUCH, onTouchPlayFromDia);
         container.addChild(playFromCurrentButton);
 
         //bij resize gewoon de container in het midden zetten... ook groene band mee resizen.
         addChild(container);
 
+    }
+
+    private function xmlLoadedHandler(e:flash.events.Event):void{
+        newXmlButton.addEventListener(TouchEvent.TOUCH, onTouchNew);
+        playButton.addEventListener(TouchEvent.TOUCH, onTouchPlay);
+        playFromCurrentButton.addEventListener(TouchEvent.TOUCH, onTouchPlayFromDia);
     }
 
     private function onTouchNew(event:TouchEvent):void{
@@ -105,8 +112,8 @@ public class MenuView extends Sprite{
         }
 
         if(event.getTouch(this, TouchPhase.ENDED)){
+            appModel.currentDia = 0;
             appModel.isPlaying = true;
-            trace(appModel.isPlaying);
         }
     }
 
@@ -125,7 +132,7 @@ public class MenuView extends Sprite{
         }
 
         if(event.getTouch(this, TouchPhase.ENDED)){
-
+            appModel.isPlaying = true;
         }
     }
 

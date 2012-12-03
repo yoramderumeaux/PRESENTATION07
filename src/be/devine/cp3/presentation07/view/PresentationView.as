@@ -7,7 +7,9 @@ import be.devine.cp3.presentation07.components.BulletsGroup;
 import be.devine.cp3.presentation07.extensions.pixelmask.PixelMaskDisplayObject;
 import be.devine.cp3.presentation07.model.AppModel;
 
+
 import flash.events.Event;
+
 
 import starling.display.Quad;
 
@@ -24,6 +26,7 @@ public class PresentationView extends Sprite{
     private var img:Quad;
     private var tekstVeld:TextField;
     private var bulletsGroup:BulletsGroup;
+
     //CONSTRUCTOR
     public function PresentationView() {
         this.appModel = AppModel.getInstance();
@@ -33,6 +36,7 @@ public class PresentationView extends Sprite{
         addChild(backGround);
 
         showDia();
+
     }
 
     private function changeDiaHandler(event:Event):void{
@@ -88,6 +92,7 @@ public class PresentationView extends Sprite{
         }
 
 
+
         for each(var tekst:TekstVO in dia.tekst){
             tekstVeld = new TextField(780 * ratio,580 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
             tekstVeld.hAlign = HAlign.LEFT;
@@ -124,6 +129,7 @@ public class PresentationView extends Sprite{
         maskedDisplayObject.mask = masker;
         addChild(maskedDisplayObject);
 
+        //in het midden plaatsen van de dia tijdens presentatie... Nog geven achterwege laten.
         //container.x = (appModel.appWidth >> 1) - (container.width >> 1);
 
     }
@@ -135,5 +141,7 @@ public class PresentationView extends Sprite{
     private function calculateRatio():Number{
         return ((appModel.appheigth/600));
     }
+
+
 }
 }

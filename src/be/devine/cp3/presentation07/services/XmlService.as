@@ -62,7 +62,7 @@ public class XmlService extends EventDispatcher{
                 bulletsArray.push(bullets);
             }
 
-            var dias:DiaVO = new DiaVO(diaNode.backgroundColor, tekstArray, imageArray, bulletsArray, diaNode.@id);
+            var dias:DiaVO = new DiaVO(diaNode.backgroundColor, tekstArray, imageArray, bulletsArray, diaNode.@id, diaNode.transition);
 
             diasArray.push(dias);
 

@@ -6,15 +6,17 @@ public class DiaVO {
     public var images:Array;
     public var bullets:Array;
     public var id:int;
+    public var transition:String;
 
     //CONSTRUCTOR
-    public function DiaVO(backgroundColor:String, tekst:Array, images:Array, bullets:Array, id:int) {
+    public function DiaVO(backgroundColor:String, tekst:Array, images:Array, bullets:Array, id:int, transition:String) {
 
         this.bgColor = backgroundColor;
         this.tekst = tekst;
         this.images = images;
         this.bullets = bullets;
         this.id = id;
+        this.transition = transition;
     }
 }
 }
