@@ -28,7 +28,7 @@ public class AppModel extends EventDispatcher{
     private var _appWidth:int = 0;
     private var _appheigth:int = 0;
 
-//CONSTRUCTOR
+    //CONSTRUCTOR
     public function AppModel(e:Enforcer) {
 
         if(e == null){

@@ -6,6 +6,7 @@ import be.devine.cp3.presentation07.VO.TekstVO;
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
+import be.devine.cp3.presentation07.services.XmlService;
 import be.devine.cp3.presentation07.view.MenuView;
 import be.devine.cp3.presentation07.view.PresentationView;
 import be.devine.cp3.presentation07.view.ThumbnailView;
@@ -52,12 +53,8 @@ public class Application extends starling.display.Sprite{
         menuView = new MenuView();
         addChild(menuView);
 
-
-        //initieel ophalen van de xml
-        xmlQueue = new Queue();
-        xmlQueue.Add(new URLLoaderTask("assets/xml/startPresentatie.xml"));
-        xmlQueue.addEventListener(Event.COMPLETE, xmlLoadedHandler);
-        xmlQueue.Start();
+        //xml initieel inladen
+        var xmlService:XmlService = new XmlService("assets/xml/startPresentatie.xml");
     }
 
     private function startPresentationHandler(event:Event){
@@ -84,49 +81,5 @@ public class Application extends starling.display.Sprite{
         }
     }
 
-    private function xmlLoadedHandler(event:Event):void{
-        var xmlTask:URLLoaderTask = xmlQueue.completedTasks[0] as URLLoaderTask;
-        var diaXml:XML = new XML(xmlTask.data);
-
-        var diasArray:Array = new Array();
-
-        // DATA in value objects steken en in een array.. dat we gemakkelijk aan de data kunnen.
-        for each(var diaNode:XML in diaXml.dia){
-            var tekstArray:Array = new Array();
-            var imageArray:Array = new Array();
-            //array voor alle bulletObjecten in dia
-            var bulletsArray:Array = new Array();
-            //array voor alle bulletItems in de BulletObjecten
-            var bulletsTextArray:Array = new Array();
-
-            trace("/// " + diaNode.@number + " ///");
-
-            for each(var textNode:XML in diaNode.text){
-                var tekst:TekstVO = new TekstVO(textNode, textNode.@fontname,textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@color,textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
-                tekstArray.push(tekst);
-            }
-
-            for each(var imageNode:XML in diaNode.image){
-                var images:ImageVO = new ImageVO(imageNode.@width, imageNode.@height, imageNode.@xpos, imageNode.@ypos, imageNode.@index, imageNode);
-                imageArray.push(images);
-            }
-
-            for each(var bulletsNode:XML in diaNode.bullets){
-                for each(var bulletTextNode:XML in bulletsNode.bullet){
-                    bulletsTextArray.push(bulletTextNode);
-                }
-                var bullets:BulletsVO = new BulletsVO(bulletsTextArray,bulletsNode.@fontname, bulletsNode.@fontsize, bulletsNode.@xpos, bulletsNode.@ypos, bulletsNode.@color, bulletsNode.@index);
-                bulletsArray.push(bullets);
-            }
-
-            //trace('testje ophalen data' + tekstArray[0].xpos);
-            var dias:DiaVO = new DiaVO(diaNode.backgroundColor, tekstArray, imageArray, bulletsArray);
-
-            diasArray.push(dias);
-
-        }
-
-        appModel.xmlDataArray = diasArray;
-    }
 }
 }

@@ -37,11 +37,11 @@ public class Main extends Sprite {
 
     private function goFullscreen(e:Event):void{
         //activeren fullscreen (werkt ng niet)
-        stage.nativeWindow.width = Capabilities.screenResolutionX;
+        /*stage.nativeWindow.width = Capabilities.screenResolutionX;
         stage.nativeWindow.height = Capabilities.screenResolutionY;
         appModel.appWidth = Capabilities.screenResolutionX;
         appModel.appheigth = Capabilities.screenResolutionY;
-        stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
+        stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;*/
         appModel.isFullscreen = true;
 
     }

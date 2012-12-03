@@ -1,12 +1,12 @@
 <dias>
     <!-- Alle hoogtes, breedtes, xpos, ypos,... zijn berekent voor een dia van 800x600 en worden via een ratio omgerekent voor de screen size in kwestie -->
-	<dia number = "1">
+	<dia id = "0">
 		<backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<text fontname = "Abel" fontsize = "50" horizontalCenter = "true" verticalCenter = "true" xpos = "0" ypos="0" color = "0x66b34e" index = "1">Titel van de presentatie</text>
         <transition>fade</transition>
 	</dia>
 	
-	<dia number = "2">
+	<dia id = "1">
 		<backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dit is ook een titel</text>
 		<text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Dit is een dummy presentatie en slaat compleet nergens op</text>
@@ -14,14 +14,14 @@
         <transition>fade</transition>
 	</dia>
 	
-	<dia number = "3">
+	<dia id = "2">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image2.jpg</image>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "false"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dit zijn bergen</text>
         <transition>fade</transition>
 	</dia>
 
-	<dia number = "4">
+	<dia id = "3">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
@@ -29,7 +29,7 @@
         <transition>fade</transition>
 	</dia>
 
-	<dia number = "5">
+	<dia id = "4">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <bullets fontname = "Abel" fontsize = "22" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
@@ -40,7 +40,7 @@
         <transition>fade</transition>
 	</dia>
 
-    <dia number = "6">
+    <dia id = "5">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>

@@ -29,7 +29,6 @@ public class PresentationView extends Sprite{
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
 
-
         var backGround:Quad = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
         addChild(backGround);
 
@@ -40,8 +39,9 @@ public class PresentationView extends Sprite{
         showDia();
     }
 
+    //dia opmaken
     private function showDia():void{
-
+        //memory clearen ( crash is nog niet opgelost hierdoor )
         if(bulletsGroup != null){
             trace("[bulletsGroup]: remove");
             bulletsGroup.dispose();
@@ -72,7 +72,7 @@ public class PresentationView extends Sprite{
         var ratio:Number = calculateRatio();
 
         masker = new Quad(diaWidth,appModel.appheigth,uint(dia.bgColor));
-        addChild(masker);
+        container.addChild(masker);
 
         for each(var image:ImageVO in dia.images){
             img = new Quad(image.width * ratio,image.height * ratio,0xff00ff);
@@ -123,6 +123,8 @@ public class PresentationView extends Sprite{
 
         maskedDisplayObject.mask = masker;
         addChild(maskedDisplayObject);
+
+        //container.x = (appModel.appWidth >> 1) - (container.width >> 1);
 
     }
 

@@ -19,6 +19,9 @@ import starling.display.Quad;
 import starling.display.Sprite;
 import be.devine.cp3.presentation07.extensions.pixelmask.PixelMaskDisplayObject;
 
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;
+
 import starling.text.TextField;
 import starling.textures.Texture;
 import starling.utils.HAlign;
@@ -34,18 +37,24 @@ public class Thumbnail extends Sprite{
     private var imageHeigth:int;
     private var imageXPos:uint;
     private var imageYPos:uint;
+    private var id:int;
 
+    private var overlay:Quad = new Quad(800,800,0x000000);
     //private var pixelMasker:PixelMaskDisplayObject;
     //CONSTRUCTOR
     public function Thumbnail(dia:DiaVO) {
 
         this.appModel = AppModel.getInstance();
+        this.id  = dia.id;
 
         masker = new Quad(200,150,uint(dia.bgColor));
         addChild(masker);
 
+        //hover event toevoegen
+        container.addEventListener(TouchEvent.TOUCH, hoverHandler);
         addChild(container);
 
+        //Alle elementen ophalen en plaatsen op de dia
         for each(var image:ImageVO in dia.images){
             var img:Quad = new Quad(image.width,image.height,0xff00ff);
             img.x = image.xpos;
@@ -88,7 +97,7 @@ public class Thumbnail extends Sprite{
             container.addChild(bulletsGroup);
         }
 
-
+        //de container 4 keer kleiner maken voor een thumbnail te creeeren
         container.scaleX = 0.25;
         container.scaleY = 0.25;
 
@@ -99,6 +108,22 @@ public class Thumbnail extends Sprite{
         maskedDisplayObject.mask = masker;
         addChild(maskedDisplayObject);
 
+    }
+
+    private function hoverHandler(event:TouchEvent):void{
+        if(event.getTouch(this, TouchPhase.HOVER)){
+            overlay.alpha = 0.7;
+            container.addChild(overlay);
+            //image toevoegen van playfromCurrentDia
+        }else{
+            container.removeChild(overlay);
+        }
+
+        if(event.getTouch(this, TouchPhase.ENDED)){
+            //currentDia aanpassen
+            //nog visueel weergeven dat deze dia de current is
+            appModel.currentDia = id;
+        }
     }
 
 

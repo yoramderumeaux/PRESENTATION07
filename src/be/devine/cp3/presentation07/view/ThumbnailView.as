@@ -7,6 +7,7 @@ import flash.events.Event;
 
 import starling.display.Quad;
 import starling.display.Sprite;
+import starling.events.TouchEvent;
 
 public class ThumbnailView extends Sprite{
     //PROPERTIES
@@ -42,7 +43,6 @@ public class ThumbnailView extends Sprite{
                 ypos = 160;
                 xpos = 5;
             }
-
         }
     }
 
