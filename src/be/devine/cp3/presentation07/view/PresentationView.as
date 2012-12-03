@@ -21,6 +21,9 @@ public class PresentationView extends Sprite{
     private var appModel:AppModel;
 
     private var container:Sprite;
+    private var img:Quad;
+    private var tekstVeld:TextField;
+    private var bulletsGroup:BulletsGroup;
     //CONSTRUCTOR
     public function PresentationView() {
         this.appModel = AppModel.getInstance();
@@ -39,13 +42,26 @@ public class PresentationView extends Sprite{
 
     private function showDia():void{
 
-        if(container != null){
-            trace("remove");
-            removeChild(container);
-            container.dispose();
+        if(bulletsGroup != null){
+            trace("[bulletsGroup]: remove");
+            bulletsGroup.dispose();
+            removeChild(bulletsGroup);
         }
-
-
+        if(img != null){
+            trace("[img]: remove");
+            img.dispose();
+            removeChild(img);
+        }
+        if(tekstVeld != null){
+            trace("[tekstVeld]: remove");
+            tekstVeld.dispose();
+            removeChild(tekstVeld);
+        }
+        if(container != null){
+            trace("[container]: remove");
+            container.dispose();
+            removeChild(container);
+        }
 
         container = new Sprite();
         var masker:Quad;
@@ -59,7 +75,7 @@ public class PresentationView extends Sprite{
         addChild(masker);
 
         for each(var image:ImageVO in dia.images){
-            var img:Quad = new Quad(image.width * ratio,image.height * ratio,0xff00ff);
+            img = new Quad(image.width * ratio,image.height * ratio,0xff00ff);
             img.x = image.xpos * ratio;
             img.y = image.ypos * ratio;
             container.addChild(img);
@@ -73,7 +89,7 @@ public class PresentationView extends Sprite{
 
 
         for each(var tekst:TekstVO in dia.tekst){
-            var tekstVeld:TextField = new TextField(780 * ratio,580 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
+            tekstVeld = new TextField(780 * ratio,580 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
 
@@ -94,7 +110,7 @@ public class PresentationView extends Sprite{
         }
 
         for each(var bullets:BulletsVO in dia.bullets){
-            var bulletsGroup:BulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize,bullets.color);
+            bulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize,bullets.color);
             bulletsGroup.x = bullets.xpos * ratio;
             bulletsGroup.y = bullets.ypos * ratio;
             container.addChild(bulletsGroup);
