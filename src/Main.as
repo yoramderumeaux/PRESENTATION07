@@ -42,7 +42,7 @@ public class Main extends Sprite {
         appModel.appWidth = Capabilities.screenResolutionX;
         appModel.appheigth = Capabilities.screenResolutionY;
         stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;*/
-        appModel.isFullscreen = true;
+        //appModel.isFullscreen = true;
 
     }
 

@@ -16,7 +16,9 @@ public class AppModel extends EventDispatcher{
 
     public static const XML_LOADED:String = "XML_LOADED";
     public static const PRESENTATION_STARTED:String = "PRESENTATION_STARTED";
-    public static const IS_FULLSCREEN:String = "IS_FULLSCREEN";
+    public static const PRESENTATION_STOPPED:String = "PRESENTATION_STOPPED";
+    // IS_FULLSCREEN KAN MSS WEG, EERST PROBLEEM MET FULLSCREEN OPLOSSEN
+    //public static const IS_FULLSCREEN:String = "IS_FULLSCREEN";
     public static const DIA_CHANGED:String = "DIA_CHANGED";
 
     private var _xmlDataArray:Array;
@@ -58,6 +60,8 @@ public class AppModel extends EventDispatcher{
         }
         if(_isPlaying == true){
             dispatchEvent(new Event(PRESENTATION_STARTED));
+        }else{
+            dispatchEvent(new Event(PRESENTATION_STOPPED));
         }
     }
 
@@ -81,7 +85,7 @@ public class AppModel extends EventDispatcher{
         }
     }
 
-    public function get isFullscreen():Boolean {
+    /*public function get isFullscreen():Boolean {
         return _isFullscreen;
     }
 
@@ -91,7 +95,7 @@ public class AppModel extends EventDispatcher{
             dispatchEvent(new Event(IS_FULLSCREEN));
         }
 
-    }
+    }*/
 
     public function get currentDia():int {
         return _currentDia;

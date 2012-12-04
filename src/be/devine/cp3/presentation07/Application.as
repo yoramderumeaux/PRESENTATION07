@@ -1,22 +1,12 @@
 package be.devine.cp3.presentation07 {
-import be.devine.cp3.presentation07.VO.BulletsVO;
-import be.devine.cp3.presentation07.VO.DiaVO;
-import be.devine.cp3.presentation07.VO.ImageVO;
-import be.devine.cp3.presentation07.VO.TekstVO;
+
 import be.devine.cp3.presentation07.model.AppModel;
-import be.devine.cp3.presentation07.requestQueue.Queue;
-import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
 import be.devine.cp3.presentation07.services.XmlService;
 import be.devine.cp3.presentation07.view.MenuView;
 import be.devine.cp3.presentation07.view.PresentationView;
 import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
-
-import flash.events.TimerEvent;
-import flash.utils.Timer;
-
-import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.events.KeyboardEvent;
@@ -27,7 +17,7 @@ public class Application extends starling.display.Sprite{
     private var menuView:MenuView;
     private var thumbnailView:ThumbnailView;
 
-    private var xmlQueue:Queue;
+    private var presentationView:PresentationView;
 
     [Embed(source="../../../../assets/spriteSheets/uiElements.xml", mimeType="application/octet-stream")]
     public static const uiXml:Class;
@@ -44,7 +34,9 @@ public class Application extends starling.display.Sprite{
         trace('[APPLICATION] ready for use');
 
         appModel = AppModel.getInstance();
-        appModel.addEventListener(AppModel.IS_FULLSCREEN, startPresentationHandler);
+        appModel.addEventListener(AppModel.PRESENTATION_STARTED, startPresentationHandler);
+        appModel.addEventListener(AppModel.PRESENTATION_STOPPED, stopPresentationHandler);
+        appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
 
         thumbnailView = new ThumbnailView();
         thumbnailView.y = 85;
@@ -55,30 +47,59 @@ public class Application extends starling.display.Sprite{
 
         //xml initieel inladen
         var xmlService:XmlService = new XmlService("assets/xml/startPresentatie.xml");
+
+        //eventlistener koppelen voor keyboard... controleer in functie of de presentatie bzig is of nie
+
+    }
+
+    private function xmlLoadedHandler(event:Event):void{
+        stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
     }
 
     private function startPresentationHandler(event:Event){
         //tonen van presentatieView nadat de app fullscreen ging
         trace('nu fullscreen');
-        var pre:PresentationView = new PresentationView();
-        stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
-        addChild(pre);
+        presentationView = new PresentationView();
+        addChild(presentationView);
+    }
+
+    private function stopPresentationHandler(event:Event){
+        //verwijder presentatie
+        if(presentationView != null){
+            presentationView.dispose();
+            removeChild(presentationView);
+        }
     }
 
     private function keyBoardHandler(event:starling.events.KeyboardEvent):void{
         //keyboard events tijdens het presenteren
         trace(event.keyCode);
-        switch (event.keyCode){
-            case 39:
+        if(appModel.isPlaying == true){
+            switch (event.keyCode){
+                case 39:
                     trace("right");
                     appModel.currentDia++;
-                break;
+                    break;
 
-            case 37:
+                case 37:
                     trace("left");
                     appModel.currentDia--;
-                break;
+                    break;
+                case 32:
+                    trace("space");
+                    appModel.isPlaying = false;
+                    break;
+            }
+
+        }else{
+            switch (event.keyCode){
+                case 32:
+                    trace("space");
+                    appModel.isPlaying = true;
+                    break;
+            }
         }
+
     }
 
 }

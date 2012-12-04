@@ -111,6 +111,7 @@ public class MenuView extends Sprite{
             removeChild(infoTekst);
         }
 
+        //Als je klikt
         if(event.getTouch(this, TouchPhase.ENDED)){
             appModel.currentDia = 0;
             appModel.isPlaying = true;
@@ -131,6 +132,7 @@ public class MenuView extends Sprite{
             removeChild(infoTekst);
         }
 
+        //Als je klikt
         if(event.getTouch(this, TouchPhase.ENDED)){
             appModel.isPlaying = true;
         }

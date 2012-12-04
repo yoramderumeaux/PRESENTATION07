@@ -39,7 +39,8 @@ public class Thumbnail extends Sprite{
     private var imageYPos:uint;
     private var id:int;
 
-    private var overlay:Quad = new Quad(800,800,0x000000);
+    private var overlay:Quad = new Quad(800,600,0x000000);
+    private var hoverField:Quad = new Quad(200,150,0x00ff00);
     //private var pixelMasker:PixelMaskDisplayObject;
     //CONSTRUCTOR
     public function Thumbnail(dia:DiaVO) {
@@ -70,7 +71,7 @@ public class Thumbnail extends Sprite{
 
 
         for each(var tekst:TekstVO in dia.tekst){
-            var tekstVeld:TextField = new TextField(780,580,tekst.tekst,tekst.fontName,tekst.fontSize,uint(tekst.color));
+            var tekstVeld:TextField = new TextField(700,540,tekst.tekst,tekst.fontName,tekst.fontSize,uint(tekst.color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
 
@@ -107,6 +108,7 @@ public class Thumbnail extends Sprite{
 
         maskedDisplayObject.mask = masker;
         addChild(maskedDisplayObject);
+
 
     }
 

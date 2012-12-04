@@ -94,7 +94,7 @@ public class PresentationView extends Sprite{
 
 
         for each(var tekst:TekstVO in dia.tekst){
-            tekstVeld = new TextField(780 * ratio,580 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
+            tekstVeld = new TextField(700 * ratio,540 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
 
