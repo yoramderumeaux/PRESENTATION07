@@ -20,6 +20,7 @@ public class AppModel extends EventDispatcher{
     // IS_FULLSCREEN KAN MSS WEG, EERST PROBLEEM MET FULLSCREEN OPLOSSEN
     //public static const IS_FULLSCREEN:String = "IS_FULLSCREEN";
     public static const DIA_CHANGED:String = "DIA_CHANGED";
+    public static const STAGE_RESIZE:String = "STAGE_RESIZE";
 
     private var _xmlDataArray:Array;
     private var _isPlaying:Boolean = false;
@@ -72,6 +73,7 @@ public class AppModel extends EventDispatcher{
     public function set appWidth(value:int):void {
         if(_appWidth != value){
             _appWidth = value;
+            dispatchEvent(new Event(STAGE_RESIZE));
         }
     }
 
@@ -82,6 +84,7 @@ public class AppModel extends EventDispatcher{
     public function set appheigth(value:int):void {
         if(_appheigth != value){
             _appheigth = value;
+            dispatchEvent(new Event(STAGE_RESIZE));
         }
     }
 

@@ -26,14 +26,12 @@ public class PresentationView extends Sprite{
     private var img:Quad;
     private var tekstVeld:TextField;
     private var bulletsGroup:BulletsGroup;
+    private var maskedDisplayObject:PixelMaskDisplayObject;
 
     //CONSTRUCTOR
     public function PresentationView() {
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
-
-        var backGround:Quad = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
-        addChild(backGround);
 
         showDia();
 
@@ -65,6 +63,11 @@ public class PresentationView extends Sprite{
             trace("[container]: remove");
             container.dispose();
             removeChild(container);
+        }
+        if(maskedDisplayObject != null){
+            trace("[maskedDisplayObject]: remove");
+            maskedDisplayObject.dispose();
+            removeChild(maskedDisplayObject);
         }
 
         container = new Sprite();
@@ -115,7 +118,7 @@ public class PresentationView extends Sprite{
         }
 
         for each(var bullets:BulletsVO in dia.bullets){
-            bulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize,bullets.color);
+            bulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize*ratio,bullets.color);
             bulletsGroup.x = bullets.xpos * ratio;
             bulletsGroup.y = bullets.ypos * ratio;
             container.addChild(bulletsGroup);
@@ -123,7 +126,7 @@ public class PresentationView extends Sprite{
 
 
         //mask via een extensie class ( PixelMaskDisplayObject )
-        var maskedDisplayObject:PixelMaskDisplayObject = new PixelMaskDisplayObject();
+        maskedDisplayObject = new PixelMaskDisplayObject();
         maskedDisplayObject.addChild(container);
 
         maskedDisplayObject.mask = masker;

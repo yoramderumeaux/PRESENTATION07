@@ -20,8 +20,9 @@ public class ThumbnailView extends Sprite{
 
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
+        appModel.addEventListener(AppModel.STAGE_RESIZE, stageResizeHandler);
 
-        background  = new Quad(1024,683,0x585858);
+        background  = new Quad(appModel.appWidth,appModel.appheigth-85,0x585858);
         addChild(background);
 
     }
@@ -39,11 +40,12 @@ public class ThumbnailView extends Sprite{
             addChild(thumb);
             xpos+=210;
             count++;
-            if(count == 4){
-                ypos = 160;
-                xpos = 5;
-            }
         }
+    }
+
+    private function stageResizeHandler(event:Event):void{
+        background.width = appModel.appWidth;
+        background.height = appModel.appheigth-85;
     }
 
 }
