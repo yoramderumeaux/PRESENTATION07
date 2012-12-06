@@ -34,28 +34,28 @@ public class ThumbnailView extends Sprite{
         backgroundThumb.y = 3;
         addChild(backgroundThumb);
 
-
     }
 
     private function xmlLoadedHandler(event:flash.events.Event):void {
         trace('[THUMBNAILVIEW]: xml loaded');
 
-        var xpos:uint = 6;
-        var ypos:uint = 6;
+        var xpos:uint = 5;
+        var ypos:uint = 5;
         var count:int = 0;
         for each(var dia:DiaVO in appModel.xmlDataArray){
-            thumb = new Thumbnail(dia);
+            var thumb:Thumbnail = new Thumbnail(dia);
             thumb.x = xpos;
             thumb.y = ypos;
-            thumb.addEventListener(TouchEvent.TOUCH, onTouchShowActive);
             addChild(thumb);
             xpos+=210;
             count++;
             if(count == 4){
                 ypos = 160;
-                xpos = 6;
+                xpos = 5;
             }
         }
+        
+        
     }
 
     // Aanduiden van de actieve thumb
@@ -72,6 +72,7 @@ public class ThumbnailView extends Sprite{
             backgroundThumb.y = activeThumb.y - 2;
         }
     }
+
 
 
 

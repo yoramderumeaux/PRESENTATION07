@@ -8,6 +8,8 @@ import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
 
+import starling.display.Quad;
+
 import starling.display.Sprite;
 import starling.events.KeyboardEvent;
 
@@ -18,6 +20,7 @@ public class Application extends starling.display.Sprite{
     private var thumbnailView:ThumbnailView;
 
     private var presentationView:PresentationView;
+    private var backGround:Quad;
 
     [Embed(source="../../../../assets/spriteSheets/uiElements.xml", mimeType="application/octet-stream")]
     public static const uiXml:Class;
@@ -59,7 +62,10 @@ public class Application extends starling.display.Sprite{
     private function startPresentationHandler(event:Event){
         //tonen van presentatieView nadat de app fullscreen ging
         trace('nu fullscreen');
+        backGround = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
+        addChild(backGround);
         presentationView = new PresentationView();
+        presentationView.x = (appModel.appWidth >> 1) - (presentationView.width >> 1);
         addChild(presentationView);
     }
 
@@ -68,6 +74,8 @@ public class Application extends starling.display.Sprite{
         if(presentationView != null){
             presentationView.dispose();
             removeChild(presentationView);
+            backGround.dispose();
+            removeChild(backGround);
         }
     }
 
