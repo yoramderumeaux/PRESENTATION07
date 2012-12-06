@@ -14,6 +14,7 @@ import starling.core.Starling;
 
 
 public class Main extends Sprite {
+
     //PROPERTIES
     private var starling:Starling;
     private var appModel:AppModel;

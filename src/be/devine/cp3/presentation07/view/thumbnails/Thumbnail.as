@@ -127,7 +127,5 @@ public class Thumbnail extends Sprite{
             appModel.currentDia = id;
         }
     }
-
-
 }
 }

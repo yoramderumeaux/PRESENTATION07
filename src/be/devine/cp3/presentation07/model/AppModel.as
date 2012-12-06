@@ -20,6 +20,7 @@ public class AppModel extends EventDispatcher{
     // IS_FULLSCREEN KAN MSS WEG, EERST PROBLEEM MET FULLSCREEN OPLOSSEN
     //public static const IS_FULLSCREEN:String = "IS_FULLSCREEN";
     public static const DIA_CHANGED:String = "DIA_CHANGED";
+    public static const THUMB_CHANGED:String = "THUMB_CHANGED";
 
     private var _xmlDataArray:Array;
     private var _isPlaying:Boolean = false;
@@ -29,6 +30,7 @@ public class AppModel extends EventDispatcher{
 
     private var _appWidth:int = 0;
     private var _appheigth:int = 0;
+
 
     //CONSTRUCTOR
     public function AppModel(e:Enforcer) {
@@ -111,11 +113,13 @@ public class AppModel extends EventDispatcher{
             if(_currentDia > _xmlDataArray.length -1){
                 _currentDia = _xmlDataArray.length -1
             }
-            trace(_currentDia);
+            trace("[APPMODEL]_currentDia : " + _currentDia);
 
             dispatchEvent(new Event(DIA_CHANGED));
         }
     }
+
+
 }
 }
 

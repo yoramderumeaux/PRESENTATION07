@@ -37,6 +37,7 @@ public class MenuView extends Sprite{
     //CONSTRUCTOR
     public function MenuView(){
         this.appModel = AppModel.getInstance();
+
         //Knoppen pas activeren als de xml is ingeladen
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
 
@@ -70,6 +71,9 @@ public class MenuView extends Sprite{
         //bij resize gewoon de container in het midden zetten... ook groene band mee resizen.
         addChild(container);
 
+
+
+
     }
 
     private function xmlLoadedHandler(e:flash.events.Event):void{
@@ -78,8 +82,10 @@ public class MenuView extends Sprite{
         playFromCurrentButton.addEventListener(TouchEvent.TOUCH, onTouchPlayFromDia);
     }
 
+    // Laadt een nieuwe XML in
     private function onTouchNew(event:TouchEvent):void{
         if(event.getTouch(newXmlButton, TouchPhase.HOVER)){
+
             ballonImage.x = (newXmlButton.x + (newXmlButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (newXmlButton.y + newXmlButton.height) + 5;
             addChild(ballonImage);
@@ -87,6 +93,7 @@ public class MenuView extends Sprite{
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
             infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
             addChild(infoTekst);
+
         }else{
             removeChild(ballonImage);
             removeChild(infoTekst);
@@ -97,6 +104,7 @@ public class MenuView extends Sprite{
         }
     }
 
+    // Play van het begin
     private function onTouchPlay(event:TouchEvent):void{
         if(event.getTouch(playButton, TouchPhase.HOVER)){
             ballonImage.x = (playButton.x + (playButton.width >> 1)) - (ballonImage.width >> 1);
@@ -118,6 +126,7 @@ public class MenuView extends Sprite{
         }
     }
 
+    // PLay from current dia
     private function onTouchPlayFromDia(event:TouchEvent):void{
         if(event.getTouch(playFromCurrentButton, TouchPhase.HOVER)){
             ballonImage.x = (playFromCurrentButton.x + (playFromCurrentButton.width >> 1)) - (ballonImage.width >> 1);
@@ -137,6 +146,8 @@ public class MenuView extends Sprite{
             appModel.isPlaying = true;
         }
     }
+
+
 
 }
 }

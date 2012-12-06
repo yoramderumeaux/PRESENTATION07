@@ -129,7 +129,7 @@ public class PresentationView extends Sprite{
         maskedDisplayObject.mask = masker;
         addChild(maskedDisplayObject);
 
-        //in het midden plaatsen van de dia tijdens presentatie... Nog geven achterwege laten.
+        //in het midden plaatsen van de dia tijdens presentatie... Nog even achterwege laten.
         //container.x = (appModel.appWidth >> 1) - (container.width >> 1);
 
     }
