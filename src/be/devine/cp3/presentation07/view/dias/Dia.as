@@ -1,4 +1,4 @@
-package be.devine.cp3.presentation07.view {
+package be.devine.cp3.presentation07.view.dias {
 import be.devine.cp3.presentation07.VO.BulletsVO;
 import be.devine.cp3.presentation07.VO.DiaVO;
 import be.devine.cp3.presentation07.VO.ImageVO;
@@ -6,25 +6,16 @@ import be.devine.cp3.presentation07.VO.TekstVO;
 import be.devine.cp3.presentation07.components.BulletsGroup;
 import be.devine.cp3.presentation07.extensions.pixelmask.PixelMaskDisplayObject;
 import be.devine.cp3.presentation07.model.AppModel;
-import be.devine.cp3.presentation07.view.dias.Dia;
-
-
-import flash.events.Event;
-
-import starling.animation.Transitions;
-
-import starling.animation.Tween;
-import starling.core.Starling;
-
 
 import starling.display.Quad;
 
 import starling.display.Sprite;
+
 import starling.text.TextField;
 import starling.utils.HAlign;
 import starling.utils.VAlign;
 
-public class PresentationView extends Sprite{
+public class Dia extends Sprite{
     //PROPERTIES
     private var appModel:AppModel;
 
@@ -34,70 +25,15 @@ public class PresentationView extends Sprite{
     private var bulletsGroup:BulletsGroup;
     private var maskedDisplayObject:PixelMaskDisplayObject;
 
-    private var dia:DiaVO;
-
-    //CONSTRUCTOR
-    public function PresentationView() {
+    //CONTAINER
+    public function Dia() {
         this.appModel = AppModel.getInstance();
-        appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
 
-        showDia();
-
-    }
-
-    private function changeDiaHandler(event:Event):void{
-        showDia();
-    }
-
-    //dia opmaken
-    private function showDia():void{
-
-        renderDia();
-
-    }
-
-    private function calculateDiaWidth():int{
-        return ((appModel.appheigth/3) * 4);
-    }
-
-    private function calculateRatio():Number{
-        return ((appModel.appheigth/600));
-    }
-
-    private function renderDia():void{
-
-        //clearen van memory
-        if(bulletsGroup != null){
-            trace("[bulletsGroup]: remove");
-            bulletsGroup.dispose();
-            removeChild(bulletsGroup);
-        }
-        if(img != null){
-            trace("[img]: remove");
-            img.dispose();
-            removeChild(img);
-        }
-        if(tekstVeld != null){
-            trace("[tekstVeld]: remove");
-            tekstVeld.dispose();
-            removeChild(tekstVeld);
-        }
-        if(container != null){
-            trace("[container]: remove");
-            container.dispose();
-            removeChild(container);
-        }
-        if(maskedDisplayObject != null){
-            trace("[maskedDisplayObject]: remove");
-            maskedDisplayObject.dispose();
-            removeChild(maskedDisplayObject);
-        }
-
-        //nieuwe dia maken
-        dia = appModel.xmlDataArray[appModel.currentDia];
-
+        //WAS EEN TEST... WORDT NU EVEN NIET MEER GEBRUIKT
         container = new Sprite();
         var masker:Quad;
+
+        var dia:DiaVO = appModel.xmlDataArray[appModel.currentDia];
 
         var diaWidth:int = calculateDiaWidth();
         var ratio:Number = calculateRatio();
@@ -163,6 +99,12 @@ public class PresentationView extends Sprite{
 
     }
 
+    private function calculateDiaWidth():int{
+        return ((appModel.appheigth/3) * 4);
+    }
 
+    private function calculateRatio():Number{
+        return ((appModel.appheigth/600));
+    }
 }
 }
