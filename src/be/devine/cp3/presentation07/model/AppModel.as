@@ -27,7 +27,7 @@ public class AppModel extends EventDispatcher{
     private var _isPlaying:Boolean = false;
     private var _isFullscreen:Boolean = false;
 
-    private var _currentDia:int = 0;
+    private var _currentDia:int = 2;
 
     private var _appWidth:int = 0;
     private var _appheigth:int = 0;
@@ -113,7 +113,7 @@ public class AppModel extends EventDispatcher{
             if(_currentDia > _xmlDataArray.length -1){
                 _currentDia = _xmlDataArray.length -1
             }
-            trace(_currentDia);
+            trace("[current dia]" + _currentDia);
 
             dispatchEvent(new Event(DIA_CHANGED));
         }

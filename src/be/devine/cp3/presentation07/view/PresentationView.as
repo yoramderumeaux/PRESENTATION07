@@ -36,6 +36,8 @@ public class PresentationView extends Sprite{
 
     private var dia:DiaVO;
 
+    public var diaWidth:int;
+
     //CONSTRUCTOR
     public function PresentationView() {
         this.appModel = AppModel.getInstance();
@@ -99,7 +101,7 @@ public class PresentationView extends Sprite{
         container = new Sprite();
         var masker:Quad;
 
-        var diaWidth:int = calculateDiaWidth();
+        diaWidth = calculateDiaWidth();
         var ratio:Number = calculateRatio();
 
         masker = new Quad(diaWidth,appModel.appheigth,uint(dia.bgColor));

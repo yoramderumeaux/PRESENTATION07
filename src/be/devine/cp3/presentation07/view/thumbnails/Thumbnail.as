@@ -39,6 +39,8 @@ public class Thumbnail extends Sprite{
     private var imageYPos:uint;
     private var id:int;
 
+    private var groenVierkant:Quad;
+
     private var overlay:Quad = new Quad(800,600,0x000000);
     private var hoverField:Quad = new Quad(200,150,0x00ff00);
     //private var pixelMasker:PixelMaskDisplayObject;
@@ -46,6 +48,9 @@ public class Thumbnail extends Sprite{
     public function Thumbnail(dia:DiaVO) {
 
         this.appModel = AppModel.getInstance();
+        ////
+        appModel.addEventListener(AppModel.DIA_CHANGED, showActive);
+        ////
         this.id  = dia.id;
 
         masker = new Quad(200,150,uint(dia.bgColor));
@@ -125,6 +130,20 @@ public class Thumbnail extends Sprite{
             //currentDia aanpassen
             //nog visueel weergeven dat deze dia de current is
             appModel.currentDia = id;
+        }
+    }
+
+    private function showActive(event:Event):void{
+        if(this.id == (appModel.currentDia)){
+            groenVierkant = new Quad(204,154,0x66b34e);
+            groenVierkant.x = -2;
+            groenVierkant.y = -2;
+            addChildAt(groenVierkant,0);
+        }else{
+            if( groenVierkant != null){
+                groenVierkant.dispose();
+                removeChild(groenVierkant);
+            }
         }
     }
 }

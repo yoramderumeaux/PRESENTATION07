@@ -42,7 +42,7 @@ public class XmlService extends EventDispatcher{
             //array voor alle bulletItems in de BulletObjecten
             var bulletsTextArray:Array = new Array();
 
-            trace("/// " + diaNode.@number + " ///");
+            //trace("/// " + diaNode.@id + " ///");
 
             for each(var textNode:XML in diaNode.text){
                 var tekst:TekstVO = new TekstVO(textNode, textNode.@fontname,textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@color,textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);

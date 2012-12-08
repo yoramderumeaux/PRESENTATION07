@@ -29,10 +29,10 @@ public class ThumbnailView extends Sprite{
         addChild(background);
 
         // Achtergrond van de thumbs
-        backgroundThumb = new Quad(204, 154, 0x66b34e);
+       /* backgroundThumb = new Quad(204, 154, 0x66b34e);
         backgroundThumb.x = 3;
         backgroundThumb.y = 3;
-        addChild(backgroundThumb);
+        addChild(backgroundThumb);*/
 
     }
 
@@ -50,12 +50,14 @@ public class ThumbnailView extends Sprite{
             xpos+=210;
             count++;
             if(count == 4){
-                ypos = 160;
+                ypos += 160;
                 xpos = 5;
+                count = 0;
             }
         }
-        
-        
+        //begindia tonen als active
+        appModel.currentDia = 0;
+
     }
 
     // Aanduiden van de actieve thumb
@@ -63,7 +65,7 @@ public class ThumbnailView extends Sprite{
 
 
     // Eerst doorgeven welke thumb er wordt gekozen
-    private function onTouchShowActive(event:TouchEvent):void{
+   /* private function onTouchShowActive(event:TouchEvent):void{
         //Als je klikt
         if(event.getTouch(this, TouchPhase.ENDED)){
             trace ("[ThumbnailView]CurrentTarget " + event.currentTarget);
@@ -71,7 +73,7 @@ public class ThumbnailView extends Sprite{
             backgroundThumb.x = activeThumb.x - 2;
             backgroundThumb.y = activeThumb.y - 2;
         }
-    }
+    }*/
 
 
 

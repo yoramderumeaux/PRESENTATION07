@@ -57,6 +57,7 @@ public class Application extends starling.display.Sprite{
 
     private function xmlLoadedHandler(event:Event):void{
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
+
     }
 
     private function startPresentationHandler(event:Event){
@@ -65,12 +66,13 @@ public class Application extends starling.display.Sprite{
         backGround = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
         addChild(backGround);
         presentationView = new PresentationView();
-        presentationView.x = (appModel.appWidth >> 1) - (presentationView.width >> 1);
+        presentationView.x = (appModel.appWidth >> 1) - (presentationView.diaWidth >> 1);
         addChild(presentationView);
     }
 
     private function stopPresentationHandler(event:Event){
         //verwijder presentatie
+        trace("[application]: presentatie stopped");
         if(presentationView != null){
             presentationView.dispose();
             removeChild(presentationView);
