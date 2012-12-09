@@ -128,6 +128,7 @@ public class MenuView extends Sprite{
 
     // PLay from current dia
     private function onTouchPlayFromDia(event:TouchEvent):void{
+
         if(event.getTouch(playFromCurrentButton, TouchPhase.HOVER)){
             ballonImage.x = (playFromCurrentButton.x + (playFromCurrentButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (playFromCurrentButton.y + playFromCurrentButton.height) + 5;

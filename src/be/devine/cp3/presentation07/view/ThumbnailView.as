@@ -1,15 +1,21 @@
 package be.devine.cp3.presentation07.view {
+import be.devine.cp3.presentation07.Application;
 import be.devine.cp3.presentation07.VO.DiaVO;
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.view.thumbnails.Thumbnail;
 
 import flash.events.Event;
 
+import starling.display.Button;
+
 import starling.display.Quad;
 import starling.display.Sprite;
 import starling.events.TouchEvent;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
+import starling.text.TextField;
+import starling.textures.Texture;
+import starling.textures.TextureAtlas;
 
 public class ThumbnailView extends Sprite{
     //PROPERTIES
@@ -17,6 +23,17 @@ public class ThumbnailView extends Sprite{
 
     private var background:Quad;
     private var thumbContainer:Sprite;
+    private var pageContainer:Sprite;
+
+    private var texture:Texture = Texture.fromBitmap(new Application.uiTexture());
+    private var xml:XML = XML(new Application.uiXml());
+    private var atlas:TextureAtlas = new TextureAtlas(texture,xml);
+
+    private var nextPage:Button;
+    private var previousPage:Button;
+    private var pageText:TextField;
+    private var page:int;
+
 
     //private var thumb:Thumbnail;
     //private var backgroundThumb:Quad;
@@ -47,6 +64,10 @@ public class ThumbnailView extends Sprite{
         var xpos:uint = 5;
         var ypos:uint = 5;
         var count:int = 0;
+
+        // Op page ga je weten op welke pagina je zit en moet de xpositie van thumbnail container mee worden vermenigvuldigd
+        page = 1;
+
         for each(var dia:DiaVO in appModel.xmlDataArray){
             var thumb:Thumbnail = new Thumbnail(dia);
             thumb.x = xpos;
@@ -66,19 +87,81 @@ public class ThumbnailView extends Sprite{
                 ypos += 160;
                 xpos -= 840;
             }
-            // Om de 16 een nieuwe pagina beginnen
+            // Om de 12 een nieuwe pagina beginnen
             if(count %12 == 0){
                 ypos = 5;
                 xpos += 860;
             }
+            if (count == 13){
+
+                pageContainer = new Sprite();
+
+                previousPage = new Button(atlas.getTexture("previousPage"));
+                previousPage.y = 2;
+                pageContainer.addChild(previousPage);
+
+
+                nextPage = new Button(atlas.getTexture("nextPage"));
+                nextPage.x = 102;
+                nextPage.y = 2;
+                nextPage.addEventListener(TouchEvent.TOUCH, onTouchnextPage);
+
+                pageContainer.addChild(nextPage);
+
+                pageText = new TextField(90, 15 ,"",'Abel',15,0xFFFFFF);
+                pageText.text = "Slide " + 1*page + " - " + 12*page ;
+                pageText.x = 10;
+                pageContainer.addChild(pageText);
+
+
+                pageContainer.x = (background.width - pageContainer.width) /2;
+                pageContainer.y = 35;
+
+
+
+                addChild(pageContainer);
+            }
+
         }
         //begindia tonen als active
         appModel.currentDia = 1;
 
-       thumbContainer.x = (background.width - (4*thumb.width)) / 2;
-       thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
+        thumbContainer.x = (background.width - (4*thumb.width)) / 2;
+        thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
 
 
+    }
+
+
+    private function onTouchnextPage(event:TouchEvent):void{
+       if(event.getTouch(this, TouchPhase.ENDED)){
+            trace ("[Thumbnailview]: Next Page + Pagenumber = " + page);
+
+           page ++;
+
+            // Vanaf je 1 keer naar de volgende pagina bent geweest kan je pas naar de vorige pagina
+            previousPage.addEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
+            thumbContainer.x -= 860;
+
+       }
+    }
+
+    private function onTouchPreviousPage(event:TouchEvent):void{
+       if(event.getTouch(this, TouchPhase.ENDED)){
+           trace ("[Thumbnailview]: Previous Page + Pagenumber = " + page);
+
+           page --;
+
+           // Wanneer je terug op de eerste pagina bent, kan je niet meer meer terug.
+               if (page == 1){
+                   previousPage.removeEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
+               }
+
+            thumbContainer.x += 860;
+
+
+
+       }
     }
 
     // Aanduiden van de actieve thumb
