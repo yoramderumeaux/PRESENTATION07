@@ -16,8 +16,10 @@ public class ThumbnailView extends Sprite{
     private var appModel:AppModel;
 
     private var background:Quad;
-    private var thumb:Thumbnail;
-    private var backgroundThumb:Quad;
+    private var thumbContainer:Sprite;
+
+    //private var thumb:Thumbnail;
+    //private var backgroundThumb:Quad;
 
     //CONSTRUCTOR
     public function ThumbnailView() {
@@ -27,6 +29,9 @@ public class ThumbnailView extends Sprite{
 
         background  = new Quad(1024,683,0x585858);
         addChild(background);
+
+        thumbContainer = new Sprite();
+        addChild(thumbContainer);
 
         // Achtergrond van de thumbs
        /* backgroundThumb = new Quad(204, 154, 0x66b34e);
@@ -46,17 +51,33 @@ public class ThumbnailView extends Sprite{
             var thumb:Thumbnail = new Thumbnail(dia);
             thumb.x = xpos;
             thumb.y = ypos;
-            addChild(thumb);
+            thumbContainer.addChild(thumb);
             xpos+=210;
-            count++;
+            /*count++;
             if(count == 4){
                 ypos += 160;
                 xpos = 5;
                 count = 0;
+            }  */
+
+            count = thumb.id;
+            // Om de 4 een nieuwe rij begonnen
+            if(count %4 == 0){
+                ypos += 160;
+                xpos -= 840;
+            }
+            // Om de 16 een nieuwe pagina beginnen
+            if(count %12 == 0){
+                ypos = 5;
+                xpos += 860;
             }
         }
         //begindia tonen als active
-        appModel.currentDia = 0;
+        appModel.currentDia = 1;
+
+       thumbContainer.x = (background.width - (4*thumb.width)) / 2;
+       thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
+
 
     }
 

@@ -37,7 +37,7 @@ public class Thumbnail extends Sprite{
     private var imageHeigth:int;
     private var imageXPos:uint;
     private var imageYPos:uint;
-    private var id:int;
+    private var _id:int;
 
     private var groenVierkant:Quad;
 
@@ -51,7 +51,7 @@ public class Thumbnail extends Sprite{
         ////
         appModel.addEventListener(AppModel.DIA_CHANGED, showActive);
         ////
-        this.id  = dia.id;
+        this._id  = dia.id;
 
         masker = new Quad(200,150,uint(dia.bgColor));
         addChild(masker);
@@ -129,12 +129,12 @@ public class Thumbnail extends Sprite{
         if(event.getTouch(this, TouchPhase.ENDED)){
             //currentDia aanpassen
             //nog visueel weergeven dat deze dia de current is
-            appModel.currentDia = id;
+            appModel.currentDia = _id;
         }
     }
 
     private function showActive(event:Event):void{
-        if(this.id == (appModel.currentDia)){
+        if(this._id == (appModel.currentDia)){
             groenVierkant = new Quad(204,154,0x66b34e);
             groenVierkant.x = -2;
             groenVierkant.y = -2;
@@ -145,6 +145,14 @@ public class Thumbnail extends Sprite{
                 removeChild(groenVierkant);
             }
         }
+    }
+
+    public function get id():int {
+        return _id;
+    }
+
+    public function set id(value:int):void {
+        _id = value;
     }
 }
 }

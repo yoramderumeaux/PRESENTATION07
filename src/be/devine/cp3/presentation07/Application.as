@@ -19,6 +19,7 @@ public class Application extends starling.display.Sprite{
     private var menuView:MenuView;
     private var thumbnailView:ThumbnailView;
 
+
     private var presentationView:PresentationView;
     private var backGround:Quad;
 
