@@ -58,7 +58,7 @@ public class Application extends starling.display.Sprite{
 
     private function xmlLoadedHandler(event:Event):void{
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
-
+        stage.addEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
     }
 
     private function startPresentationHandler(event:Event){
@@ -106,11 +106,16 @@ public class Application extends starling.display.Sprite{
             switch (event.keyCode){
                 case 32:
                     trace("space");
+                    stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
                     appModel.isPlaying = true;
                     break;
             }
         }
 
+    }
+
+    private function keyBoardUPHandler(event:starling.events.KeyboardEvent):void{
+        stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
     }
 
 }
