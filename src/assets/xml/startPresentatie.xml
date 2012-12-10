@@ -2,7 +2,7 @@
     <!-- Alle hoogtes, breedtes, xpos, ypos,... zijn berekent voor een dia van 800x600 en worden via een ratio omgerekent voor de screen size in kwestie -->
     <!-- We beginnen bij DIA ID 1 omdat het anders niet uitkomt voor de layout in de thumbnail overzicht -->
 
-    <dia id = "1">
+    <dia id = "0">
 		<backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dit is ook een titel</text>
 		<text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Dit is een dummy presentatie en slaat compleet nergens op</text>
@@ -10,14 +10,14 @@
         <transition>fade</transition>
 	</dia>
 	
-	<dia id = "2">
+	<dia id = "1">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image2.jpg</image>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "false"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dit zijn bergen</text>
         <transition>fade</transition>
 	</dia>
 
-	<dia id = "3">
+	<dia id = "2">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
@@ -25,7 +25,7 @@
         <transition>fade</transition>
 	</dia>
 
-	<dia id = "4">
+	<dia id = "3">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <bullets fontname = "Abel" fontsize = "22" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
@@ -36,7 +36,7 @@
         <transition>fade</transition>
 	</dia>
 
-    <dia id = "5">
+    <dia id = "4">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
@@ -44,13 +44,13 @@
         <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
         <transition>fade</transition>
     </dia>
-    <dia id = "6">
+    <dia id = "5">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "50" horizontalCenter = "true" verticalCenter = "true" xpos = "0" ypos="0" color = "0x66b34e" index = "1">Titel van de presentatie</text>
         <transition>fade</transition>
     </dia>
 
-    <dia id = "7">
+    <dia id = "6">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dit is ook een titel</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Dit is een dummy presentatie en slaat compleet nergens op</text>
@@ -58,14 +58,14 @@
         <transition>fade</transition>
     </dia>
 
-    <dia id = "8">
+    <dia id = "7">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image2.jpg</image>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "false"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dit zijn bergen</text>
         <transition>fade</transition>
     </dia>
 
-    <dia id = "9">
+    <dia id = "8">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
@@ -73,7 +73,7 @@
         <transition>fade</transition>
     </dia>
 
-    <dia id = "10">
+    <dia id = "9">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Titel van deze slide</text>
         <bullets fontname = "Abel" fontsize = "22" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
@@ -81,6 +81,15 @@
             <bullet>Dit ook</bullet>
             <bullet>en dit nog meer</bullet>
         </bullets>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "10">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image1.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
         <transition>fade</transition>
     </dia>
 
@@ -122,16 +131,16 @@
 
     <dia id = "15">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
-        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
-        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
-        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image1.jpg</image>
-        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
+        <text fontname = "Abel" fontsize = "50" horizontalCenter = "true" verticalCenter = "true" xpos = "0" ypos="0" color = "0x66b34e" index = "1">Titel van de presentatie</text>
         <transition>fade</transition>
     </dia>
 
     <dia id = "16">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
-        <text fontname = "Abel" fontsize = "50" horizontalCenter = "true" verticalCenter = "true" xpos = "0" ypos="0" color = "0x66b34e" index = "1">Titel van de presentatie</text>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image1.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
         <transition>fade</transition>
     </dia>
 
@@ -145,15 +154,6 @@
     </dia>
 
     <dia id = "18">
-        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
-        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">2 fotootjes: joepie</text>
-        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nutteloze dummy-tekst</text>
-        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image1.jpg</image>
-        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image2.jpg</image>
-        <transition>fade</transition>
-    </dia>
-
-    <dia id = "19">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <text fontname = "Abel" fontsize = "50" horizontalCenter = "true" verticalCenter = "true" xpos = "0" ypos="0" color = "0x66b34e" index = "1">Titel van de presentatie</text>
         <transition>fade</transition>

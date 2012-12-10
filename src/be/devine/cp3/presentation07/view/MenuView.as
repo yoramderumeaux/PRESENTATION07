@@ -9,6 +9,7 @@ import starling.display.Image;
 
 import starling.display.Quad;
 import starling.display.Sprite;
+import starling.display.Stage;
 import starling.events.Event;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
@@ -34,15 +35,17 @@ public class MenuView extends Sprite{
     private var infoTekst:TextField = new TextField(90,40,"",'Helvetica',15,0x66b34e);
 
     private var container:Sprite = new Sprite();
+    private var background:Quad;
     //CONSTRUCTOR
     public function MenuView(){
         this.appModel = AppModel.getInstance();
 
         //Knoppen pas activeren als de xml is ingeladen
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
+        appModel.addEventListener(AppModel.STAGE_RESIZE, resizeHandler);
 
         //groene achtergrond maken
-        var background:Quad = new Quad(1024,85,0x66b34e);
+        background = new Quad(appModel.appWidth,85,0x66b34e);
         addChild(background);
 
         //titel displayen
@@ -88,15 +91,15 @@ public class MenuView extends Sprite{
 
             ballonImage.x = (newXmlButton.x + (newXmlButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (newXmlButton.y + newXmlButton.height) + 5;
-            addChild(ballonImage);
+            container.addChild(ballonImage);
             infoTekst.text = "Load a new presentation";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
             infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
-            addChild(infoTekst);
+            container.addChild(infoTekst);
 
         }else{
-            removeChild(ballonImage);
-            removeChild(infoTekst);
+            container.removeChild(ballonImage);
+            container.removeChild(infoTekst);
         }
 
         if(event.getTouch(this, TouchPhase.ENDED)){
@@ -109,14 +112,14 @@ public class MenuView extends Sprite{
         if(event.getTouch(playButton, TouchPhase.HOVER)){
             ballonImage.x = (playButton.x + (playButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (playButton.y + playButton.height) + 5;
-            addChild(ballonImage);
+            container.addChild(ballonImage);
             infoTekst.text = "Play from start";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
             infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
-            addChild(infoTekst);
+            container.addChild(infoTekst);
         }else{
-            removeChild(ballonImage);
-            removeChild(infoTekst);
+            container.removeChild(ballonImage);
+            container.removeChild(infoTekst);
         }
 
         //Als je klikt
@@ -132,14 +135,14 @@ public class MenuView extends Sprite{
         if(event.getTouch(playFromCurrentButton, TouchPhase.HOVER)){
             ballonImage.x = (playFromCurrentButton.x + (playFromCurrentButton.width >> 1)) - (ballonImage.width >> 1);
             ballonImage.y = (playFromCurrentButton.y + playFromCurrentButton.height) + 5;
-            addChild(ballonImage);
+            container.addChild(ballonImage);
             infoTekst.text = "Play from selected dia";
             infoTekst.x = ballonImage.x + ((ballonImage.width >> 1) - (infoTekst.width >>1));
             infoTekst.y = ballonImage.y + 4 + ((ballonImage.height >> 1) - (infoTekst.height >>1));
-            addChild(infoTekst);
+            container.addChild(infoTekst);
         }else{
-            removeChild(ballonImage);
-            removeChild(infoTekst);
+            container.removeChild(ballonImage);
+            container.removeChild(infoTekst);
         }
 
         //Als je klikt
@@ -148,6 +151,11 @@ public class MenuView extends Sprite{
         }
     }
 
+    private function resizeHandler(event:flash.events.Event):void{
+        trace("resize");
+        background.width = appModel.appWidth;
+        container.x = ((appModel.appWidth >> 1) - (container.width >> 1)) - 210;
+    }
 
 
 }

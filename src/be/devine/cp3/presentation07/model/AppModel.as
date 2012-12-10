@@ -74,6 +74,7 @@ public class AppModel extends EventDispatcher{
     public function set appWidth(value:int):void {
         if(_appWidth != value){
             _appWidth = value;
+            dispatchEvent(new Event(STAGE_RESIZE));
         }
     }
 
@@ -84,6 +85,7 @@ public class AppModel extends EventDispatcher{
     public function set appheigth(value:int):void {
         if(_appheigth != value){
             _appheigth = value;
+            dispatchEvent(new Event(STAGE_RESIZE));
         }
     }
 
