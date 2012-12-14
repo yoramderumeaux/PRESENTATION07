@@ -64,19 +64,12 @@ public class PresentationView extends Sprite{
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
 
-        showDia();
+        renderDia();
     }
 
     //METHODS
     private function changeDiaHandler(event:Event):void{
-        showDia();
-    }
-
-    //dia opmaken
-    private function showDia():void{
-
         renderDia();
-
     }
 
     private function calculateDiaWidth():int{
@@ -90,12 +83,12 @@ public class PresentationView extends Sprite{
     private function renderDia():void{
 
         //clearen van memory
-        if(imageQueue != null) {
+        /*if(imageQueue != null) {
             imageQueue.removeEventListener(Event.COMPLETE, imagesComplete);
             imageQueue.stop();
-        }
+        }*/
 
-        if(textureArray.length > 0){
+        /*if(textureArray.length > 0){
             for each(var textureData:RenderTexture in textureArray){
                 textureData.dispose();
             }
@@ -108,7 +101,7 @@ public class PresentationView extends Sprite{
                 removeChild(diaImageData);
             }
             diaImageArray.splice(0);
-        }
+        }*/
 
         //nieuwe dia maken
         dia = appModel.xmlDataArray[appModel.currentDia];
@@ -127,11 +120,12 @@ public class PresentationView extends Sprite{
             imageDataArray.push(new Array(image.width,image.height,image.xpos, image.ypos));
             imageQueue.Add(new ImageLoaderTask(image.path));
         }
-        imageQueue.addEventListener(Event.COMPLETE, imagesComplete);
-        imageQueue.start();
 
         if(dia.images.length == 0){
             restOfDia();
+        }else{
+            imageQueue.addEventListener(Event.COMPLETE, imagesComplete);
+            imageQueue.start();
         }
     }
 
@@ -143,21 +137,24 @@ public class PresentationView extends Sprite{
                 bd.draw(images);
                 var b:Bitmap = new Bitmap(bd);
 
-                var displayedImage:Image = Image.fromBitmap(b);
-                displayedImage.width = imageDataArray[i][0] * ratio;
-                displayedImage.height = imageDataArray[i][1] * ratio;
-                displayedImage.x = imageDataArray[i][2] * ratio;
-                displayedImage.y = imageDataArray[i][3] * ratio;
-                container.addChild(displayedImage);
-                //displayedImage.dispose();
-                imagesArray.push(displayedImage);
+                if(imageDataArray[i] != null){
+                    var displayedImage:Image = Image.fromBitmap(b);
+                    displayedImage.width = imageDataArray[i][0] * ratio;
+                    displayedImage.height = imageDataArray[i][1] * ratio;
+                    displayedImage.x = imageDataArray[i][2] * ratio;
+                    displayedImage.y = imageDataArray[i][3] * ratio;
+                    container.addChild(displayedImage);
+                    //displayedImage.dispose();
+                    imagesArray.push(displayedImage);
+                }
+
             }
         }
         restOfDia();
+
     }
 
     private function restOfDia():void{
-
         for each(var tekst:TekstVO in dia.tekst){
             var tekstVeld:TextField = new TextField(700 * ratio,300 * ratio,tekst.tekst,tekst.fontName,tekst.fontSize*ratio,uint(tekst.color));
             tekstVeld.hAlign = HAlign.LEFT;
@@ -233,6 +230,38 @@ public class PresentationView extends Sprite{
             imageDataArray.splice(0);
         }
 
+
+
+        if(dia.transition == 'fade'){
+            diaImage.alpha = 0;
+            var tween:Tween = new Tween(diaImage, 1, Transitions.EASE_IN_OUT);
+            tween.fadeTo(1);    // equivalent to 'animate("alpha", 0)'
+            Starling.juggler.add(tween);
+        }
+        if(dia.transition == 'inschuiven'){
+            diaImage.y = appModel.appheigth;
+            var tween:Tween = new Tween(diaImage, 1.5,Transitions.EASE_IN_OUT);
+            tween.animate("y", 0);
+            Starling.juggler.add(tween);
+        }
+        tween.onComplete = clearPreviousDia;
+    }
+
+    private function clearPreviousDia():void{
+        trace(diaImageArray.length);
+        if(diaImageArray.length >= 2){
+
+            var deleteDiaTexture = textureArray.shift();
+            var deleteDiaImage = diaImageArray.shift();
+
+            var diaTextureData:RenderTexture = deleteDiaTexture as RenderTexture;
+            diaTextureData.dispose();
+
+            var diaImageData:Image = deleteDiaImage as Image;
+            diaImageData.dispose();
+            removeChild(diaImageData);
+
+        }
     }
 
 

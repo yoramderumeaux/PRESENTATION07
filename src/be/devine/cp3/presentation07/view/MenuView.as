@@ -151,7 +151,7 @@ public class MenuView extends Sprite{
     private function resizeHandler(event:flash.events.Event):void{
         trace("resize");
         background.width = appModel.appWidth;
-        container.x = ((appModel.appWidth >> 1) - (container.width >> 1)) - 210;
+        container.x = ((appModel.appWidth >> 1) - (container.width >> 1)) - 281;
     }
 
 

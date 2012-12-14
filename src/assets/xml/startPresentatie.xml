@@ -7,14 +7,14 @@
 		<text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dit is ook een titel</text>
 		<text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Dit is een dummy presentatie en slaat compleet nergens op</text>
 		<image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image1.jpg</image>
-        <transition>fade</transition>
+        <transition>inschuiven</transition>
 	</dia>
 	
 	<dia id = "1">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
 		<image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image2.jpg</image>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "false"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dit zijn bergen</text>
-        <transition>fade</transition>
+        <transition>inschuiven</transition>
 	</dia>
 
 	<dia id = "2">
@@ -33,7 +33,7 @@
             <bullet>Dit ook</bullet>
             <bullet>en dit nog meer</bullet>
         </bullets>
-        <transition>fade</transition>
+        <transition>inschuiven</transition>
 	</dia>
 
     <dia id = "4">
@@ -55,14 +55,14 @@
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dit is ook een titel</text>
         <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Dit is een dummy presentatie en slaat compleet nergens op</text>
         <image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image1.jpg</image>
-        <transition>fade</transition>
+        <transition>inschuiven</transition>
     </dia>
 
     <dia id = "7">
         <backgroundColor index = "0">0xe3e3e3</backgroundColor>
         <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image2.jpg</image>
         <text fontname = "Abel" fontsize = "40" horizontalCenter = "false"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dit zijn bergen</text>
-        <transition>fade</transition>
+        <transition>inschuiven</transition>
     </dia>
 
     <dia id = "8">

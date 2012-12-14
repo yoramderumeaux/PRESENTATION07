@@ -1,10 +1,12 @@
 package be.devine.cp3.presentation07.view {
 import be.devine.cp3.presentation07.Application;
 import be.devine.cp3.presentation07.VO.DiaVO;
+import be.devine.cp3.presentation07.extensions.pixelmask.PixelMaskDisplayObject;
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.view.thumbnails.Thumbnail;
 
 import flash.events.Event;
+import flash.geom.Rectangle;
 
 import starling.display.Button;
 
@@ -36,6 +38,8 @@ public class ThumbnailView extends Sprite{
     private var pagesTotal:int;
     private var endSlidesNumber:int;
 
+    private var mask:Quad;
+    private var maskedDisplayObject:PixelMaskDisplayObject;
     //CONSTRUCTOR
     public function ThumbnailView() {
 
@@ -118,9 +122,17 @@ public class ThumbnailView extends Sprite{
         //begindia tonen als active
         appModel.currentDia = 0;
 
-        thumbContainer.x = (background.width - (4*thumb.width)) / 2;
+        thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
         thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
 
+        /*mask = new Quad(840,600,0xff0000);
+        mask.x = thumbContainer.x;
+        mask.y = thumbContainer.y;
+
+        maskedDisplayObject = new PixelMaskDisplayObject();
+        maskedDisplayObject.addChild(thumbContainer);
+        maskedDisplayObject.mask = mask;
+        addChild(maskedDisplayObject);*/
     }
 
 
@@ -164,8 +176,12 @@ public class ThumbnailView extends Sprite{
         background.width = appModel.appWidth;
         background.height = appModel.appheigth-85;
         pageContainer.x = (appModel.appWidth >> 1) - (pageContainer.width >> 1);
-        thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2) + 5;
-        //thumbContainer.x = (background.width - (4*thumb.width)) / 2;
+        thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
+        //mask.x = thumbContainer.x;
+        //mask.y = thumbContainer.y;
+
+        //maskedDisplayObject.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2) + 5;
+       // thumbContainer.x = (background.width - (4*thumb.width)) / 2;
     }
 
 
