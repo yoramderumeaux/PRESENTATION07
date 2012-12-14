@@ -23,7 +23,7 @@ public class XmlService extends EventDispatcher{
         xmlQueue = new Queue();
         xmlQueue.Add(new URLLoaderTask(xmlPath));
         xmlQueue.addEventListener(Event.COMPLETE, xmlLoadedHandler);
-        xmlQueue.Start();
+        xmlQueue.start();
 
     }
 

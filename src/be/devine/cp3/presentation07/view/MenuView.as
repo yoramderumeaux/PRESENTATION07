@@ -74,9 +74,6 @@ public class MenuView extends Sprite{
         //bij resize gewoon de container in het midden zetten... ook groene band mee resizen.
         addChild(container);
 
-
-
-
     }
 
     private function xmlLoadedHandler(e:flash.events.Event):void{

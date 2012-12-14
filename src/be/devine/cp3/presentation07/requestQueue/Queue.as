@@ -24,7 +24,7 @@ public class Queue extends EventDispatcher{
         totalTasks++;
     }
 
-    public function Start():void{
+    public function start():void{
 
         if (tasks.length>0){
             currentTask = tasks.shift();
@@ -35,12 +35,21 @@ public class Queue extends EventDispatcher{
         }
     }
 
+    public function stop():void{
+        //code schrijven die in tasks, currentTask en completedtasks event listeners removed
+        //currentTask.removeEventListener(Event.COMPLETE,currentTaskCompleteHandler);
+        tasks.splice(0);
+        completedTasks.splice(0);
+        currentTask = null;
+        //arrays leegmaken, instellen currentTask op null
+    }
+
     private function currentTaskCompleteHandler(event:Event):void {
         completedTasks.push(event.target);
 
         dispatchEvent(new ProgressEvent(ProgressEvent.PROGRESS,false,false,completedTasks.length,totalTasks));
 
-        Start();
+        start();
     }
 }
 }

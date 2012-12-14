@@ -6,20 +6,25 @@ import starling.utils.VAlign;
 
 public class BulletsGroup extends Sprite{
     //PROPERTIES
-
+    private var tekstVeld:TextField;
     //CONSTRUCTOR
     public function BulletsGroup(items:Array, fontName:String, fontSize:int, color:String) {
 
         var yPos:int = 0;
 
         for each(var tekst:String in items){
-            var tekstVeld:TextField = new TextField(780,580,tekst,fontName,fontSize,uint(color));
+            tekstVeld = new TextField(750,300,tekst,fontName,fontSize,uint(color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
             tekstVeld.y = yPos;
             addChild(tekstVeld);
             yPos += fontSize + 10;
         }
+    }
+
+    public function disposeTextField():void{
+        tekstVeld.dispose();
+        removeChild(tekstVeld);
     }
 }
 }

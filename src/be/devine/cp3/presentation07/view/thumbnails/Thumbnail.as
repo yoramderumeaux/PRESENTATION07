@@ -5,6 +5,14 @@ import be.devine.cp3.presentation07.VO.ImageVO;
 import be.devine.cp3.presentation07.VO.TekstVO;
 import be.devine.cp3.presentation07.components.BulletsGroup;
 import be.devine.cp3.presentation07.model.AppModel;
+import be.devine.cp3.presentation07.requestQueue.ImageLoaderTask;
+import be.devine.cp3.presentation07.requestQueue.Queue;
+
+import flash.display.Bitmap;
+
+import flash.display.BitmapData;
+
+import flash.display.DisplayObject;
 
 import flash.display.Loader;
 
@@ -42,16 +50,21 @@ public class Thumbnail extends Sprite{
     private var groenVierkant:Quad;
 
     private var overlay:Quad = new Quad(800,600,0x000000);
-    private var hoverField:Quad = new Quad(200,150,0x00ff00);
-    //private var pixelMasker:PixelMaskDisplayObject;
+
+    private var imageQueue:Queue;
+    private var imageDataArray:Array = new Array();
+    private var displayedImage:Image;
+
+    private var dia:DiaVO;
+
     //CONSTRUCTOR
     public function Thumbnail(dia:DiaVO) {
 
         this.appModel = AppModel.getInstance();
-        ////
         appModel.addEventListener(AppModel.DIA_CHANGED, showActive);
-        ////
         this._id  = dia.id;
+
+        this.dia = dia;
 
         masker = new Quad(200,150,uint(dia.bgColor));
         addChild(masker);
@@ -60,59 +73,21 @@ public class Thumbnail extends Sprite{
         container.addEventListener(TouchEvent.TOUCH, hoverHandler);
         addChild(container);
 
-        //Alle elementen ophalen en plaatsen op de dia
+        imageQueue = new Queue();
+
         for each(var image:ImageVO in dia.images){
-            var img:Quad = new Quad(image.width,image.height,0xff00ff);
-            img.x = image.xpos;
-            img.y = image.ypos;
-            container.addChild(img);
-            this.imageWidth = image.width;
-            this.imageHeigth = image.height;
-            this.imageXPos = image.xpos;
-            this.imageYPos = image.ypos;
-
+            imageDataArray.push(new Array(image.width,image.height,image.xpos, image.ypos));
             //images laden via de requestQueue
+            imageQueue.Add(new ImageLoaderTask(image.path));
+        }
+
+        imageQueue.addEventListener(Event.COMPLETE, imagesComplete);
+        imageQueue.start();
+        if(dia.images.length == 0){
+            restOfDia();
         }
 
 
-        for each(var tekst:TekstVO in dia.tekst){
-            var tekstVeld:TextField = new TextField(700,540,tekst.tekst,tekst.fontName,tekst.fontSize,uint(tekst.color));
-            tekstVeld.hAlign = HAlign.LEFT;
-            tekstVeld.vAlign = VAlign.TOP;
-
-            if(tekst.horizontalCenter == "true"){
-                tekstVeld.hAlign = HAlign.CENTER;
-                tekstVeld.x = (800 >> 1) - (tekstVeld.width >> 1);
-            }else{
-                tekstVeld.x = tekst.xpos;
-            }
-
-            if(tekst.verticalCenter == "true"){
-                tekstVeld.vAlign = VAlign.CENTER;
-                tekstVeld.y = (600 >> 1) - (tekstVeld.height >> 1);
-            }else{
-                tekstVeld.y = tekst.ypos;
-            }
-            container.addChild(tekstVeld);
-        }
-
-        for each(var bullets:BulletsVO in dia.bullets){
-            var bulletsGroup:BulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize,bullets.color);
-            bulletsGroup.x = bullets.xpos;
-            bulletsGroup.y = bullets.ypos;
-            container.addChild(bulletsGroup);
-        }
-
-        //de container 4 keer kleiner maken voor een thumbnail te creeeren
-        container.scaleX = 0.25;
-        container.scaleY = 0.25;
-
-        //mask via een extensie class ( PixelMaskDisplayObject )
-        var maskedDisplayObject:PixelMaskDisplayObject = new PixelMaskDisplayObject();
-        maskedDisplayObject.addChild(container);
-
-        maskedDisplayObject.mask = masker;
-        addChild(maskedDisplayObject);
 
 
     }
@@ -153,6 +128,70 @@ public class Thumbnail extends Sprite{
 
     public function set id(value:int):void {
         _id = value;
+    }
+
+    private function imagesComplete(e:Event):void{
+        /*for(var i:uint = 0; imageQueue.completedTasks.length > i; i++){
+            if(imageQueue.completedTasks[i] is DisplayObject){
+                var images:DisplayObject = imageQueue.completedTasks[i];
+                var bd:BitmapData = new BitmapData(images.width, images.height, true,0xFFFFFFFF);
+                bd.draw(images);
+                var b:Bitmap = new Bitmap(bd);
+
+                displayedImage = Image.fromBitmap(b);
+                displayedImage.width = imageDataArray[i][0];
+                displayedImage.height = imageDataArray[i][1];
+                displayedImage.x = imageDataArray[i][2];
+                displayedImage.y = imageDataArray[i][3];
+                container.addChild(displayedImage);
+            }
+        }*/
+        restOfDia();
+    }
+
+    private function restOfDia():void{
+
+        for each(var tekst:TekstVO in dia.tekst){
+            var tekstVeld:TextField = new TextField(700,540,tekst.tekst,tekst.fontName,tekst.fontSize,uint(tekst.color));
+            tekstVeld.hAlign = HAlign.LEFT;
+            tekstVeld.vAlign = VAlign.TOP;
+
+            if(tekst.horizontalCenter == "true"){
+                tekstVeld.hAlign = HAlign.CENTER;
+                tekstVeld.x = (800 >> 1) - (tekstVeld.width >> 1);
+            }else{
+                tekstVeld.x = tekst.xpos;
+            }
+
+            if(tekst.verticalCenter == "true"){
+                tekstVeld.vAlign = VAlign.CENTER;
+                tekstVeld.y = (600 >> 1) - (tekstVeld.height >> 1);
+            }else{
+                tekstVeld.y = tekst.ypos;
+            }
+            container.addChild(tekstVeld);
+        }
+
+        for each(var bullets:BulletsVO in dia.bullets){
+            var bulletsGroup:BulletsGroup = new BulletsGroup(bullets.bullets,bullets.fontName,bullets.fontSize,bullets.color);
+            bulletsGroup.x = bullets.xpos;
+            bulletsGroup.y = bullets.ypos;
+            container.addChild(bulletsGroup);
+        }
+
+        //de container 4 keer kleiner maken voor een thumbnail te creeeren
+        container.scaleX = 0.25;
+        container.scaleY = 0.25;
+
+        container.flatten();
+
+        //mask via een extensie class ( PixelMaskDisplayObject )
+        var maskedDisplayObject:PixelMaskDisplayObject = new PixelMaskDisplayObject();
+        maskedDisplayObject.addChild(container);
+
+        maskedDisplayObject.mask = masker;
+        addChild(maskedDisplayObject);
+
     }
 }
 }

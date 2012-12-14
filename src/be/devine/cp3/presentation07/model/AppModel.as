@@ -116,8 +116,8 @@ public class AppModel extends EventDispatcher{
                 _currentDia = _xmlDataArray.length -1
             }
             trace("[current dia]" + _currentDia);
-
             dispatchEvent(new Event(DIA_CHANGED));
+
         }
     }
 }
