@@ -6,14 +6,14 @@ import starling.utils.VAlign;
 
 public class BulletsGroup extends Sprite{
     //PROPERTIES
-    private var tekstVeld:TextField;
+    private var tekstVeldArray:Array = new Array();
     //CONSTRUCTOR
     public function BulletsGroup(items:Array, fontName:String, fontSize:int, color:String) {
 
         var yPos:int = 0;
 
         for each(var tekst:String in items){
-            tekstVeld = new TextField(750,300,tekst,fontName,fontSize,uint(color));
+            var tekstVeld:TextField = new TextField(750,300,tekst,fontName,fontSize,uint(color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
             tekstVeld.y = yPos;
@@ -23,8 +23,13 @@ public class BulletsGroup extends Sprite{
     }
 
     public function disposeTextField():void{
-        tekstVeld.dispose();
-        removeChild(tekstVeld);
+        if(tekstVeldArray.length > 0){
+            for each(var tekstData:TextField in tekstVeldArray){
+                tekstData.dispose();
+                removeChild(tekstData);
+            }
+            tekstVeldArray.splice(0);
+        }
     }
 }
 }

@@ -26,7 +26,7 @@ public class MenuView extends Sprite{
     private var xml:XML = XML(new Application.uiXml());
     private var atlas:TextureAtlas = new TextureAtlas(texture,xml);
 
-    private var newXmlButton:Button;
+    //private var newXmlButton:Button;
     private var playButton:Button;
     private var playFromCurrentButton:Button;
 
@@ -56,18 +56,18 @@ public class MenuView extends Sprite{
         container.addChild(titelImage);
 
         //buttons aanmaken
-        newXmlButton = new Button(atlas.getTexture('newXml'));
+        /*newXmlButton = new Button(atlas.getTexture('newXml'));
         newXmlButton.x = 121;
         newXmlButton.y = 29;
-        container.addChild(newXmlButton);
+        container.addChild(newXmlButton);*/
 
         playButton = new Button(atlas.getTexture('playFromStart'));
-        playButton.x = 307;
+        playButton.x = 121;//307
         playButton.y = 29;
         container.addChild(playButton);
 
         playFromCurrentButton = new Button(atlas.getTexture('playFromCurrentDia_small'));
-        playFromCurrentButton.x = 687;
+        playFromCurrentButton.x = 307;//687
         playFromCurrentButton.y = 29;
         container.addChild(playFromCurrentButton);
 
@@ -77,13 +77,13 @@ public class MenuView extends Sprite{
     }
 
     private function xmlLoadedHandler(e:flash.events.Event):void{
-        newXmlButton.addEventListener(TouchEvent.TOUCH, onTouchNew);
+        //newXmlButton.addEventListener(TouchEvent.TOUCH, onTouchNew);
         playButton.addEventListener(TouchEvent.TOUCH, onTouchPlay);
         playFromCurrentButton.addEventListener(TouchEvent.TOUCH, onTouchPlayFromDia);
     }
 
     // Laadt een nieuwe XML in
-    private function onTouchNew(event:TouchEvent):void{
+    /*private function onTouchNew(event:TouchEvent):void{
         if(event.getTouch(newXmlButton, TouchPhase.HOVER)){
 
             ballonImage.x = (newXmlButton.x + (newXmlButton.width >> 1)) - (ballonImage.width >> 1);
@@ -102,7 +102,7 @@ public class MenuView extends Sprite{
         if(event.getTouch(this, TouchPhase.ENDED)){
             // event dispatchen om nieuwe xml in te laden
         }
-    }
+    }*/
 
     // Play van het begin
     private function onTouchPlay(event:TouchEvent):void{

@@ -42,9 +42,7 @@ public class PresentationView extends Sprite{
     private var appModel:AppModel;
 
     private var container:Sprite;
-    //private var tekstVeld:TextField;
-    //private var bulletsGroup:BulletsGroup;
-    private var maskedDisplayObject:PixelMaskDisplayObject;
+
     private var masker:Quad;
     private var ratio:Number;
 
@@ -54,14 +52,12 @@ public class PresentationView extends Sprite{
 
     private var imageQueue:Queue;
     private var imageDataArray:Array = new Array();
-    //private var displayedImage:Image;
-
-    private var renderTexture:RenderTexture;
-    private var diaImage:Image;
 
     private var textArray:Array = new Array();
     private var imagesArray:Array = new Array();
     private var bulletsGroupArray:Array = new Array();
+    private var textureArray:Array = new Array();
+    private var diaImageArray:Array = new Array();
 
     //CONSTRUCTOR
     public function PresentationView() {
@@ -69,9 +65,9 @@ public class PresentationView extends Sprite{
         appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
 
         showDia();
-
     }
 
+    //METHODS
     private function changeDiaHandler(event:Event):void{
         showDia();
     }
@@ -93,19 +89,25 @@ public class PresentationView extends Sprite{
 
     private function renderDia():void{
 
+        //clearen van memory
         if(imageQueue != null) {
             imageQueue.removeEventListener(Event.COMPLETE, imagesComplete);
             imageQueue.stop();
         }
 
-        if(renderTexture != null){
-            trace("[RENDER]: remove");
-            renderTexture.dispose();
+        if(textureArray.length > 0){
+            for each(var textureData:RenderTexture in textureArray){
+                textureData.dispose();
+            }
+            textureArray.splice(0);
         }
-        if(diaImage != null){
-            trace("[diaImage]: remove");
-            diaImage.dispose();
-            removeChild(diaImage);
+
+        if(diaImageArray.length > 0){
+            for each(var diaImageData:Image in diaImageArray){
+                diaImageData.dispose();
+                removeChild(diaImageData);
+            }
+            diaImageArray.splice(0);
         }
 
         //nieuwe dia maken
@@ -123,18 +125,14 @@ public class PresentationView extends Sprite{
 
         for each(var image:ImageVO in dia.images){
             imageDataArray.push(new Array(image.width,image.height,image.xpos, image.ypos));
-            //images laden via de requestQueue
             imageQueue.Add(new ImageLoaderTask(image.path));
         }
-
         imageQueue.addEventListener(Event.COMPLETE, imagesComplete);
         imageQueue.start();
+
         if(dia.images.length == 0){
             restOfDia();
         }
-
-
-
     }
 
     private function imagesComplete(e:Event):void{
@@ -190,19 +188,14 @@ public class PresentationView extends Sprite{
             bulletsGroupArray.push(bulletsGroup);
         }
 
-        //mask via een extensie class ( PixelMaskDisplayObject )
-       /* maskedDisplayObject = new PixelMaskDisplayObject();
-        maskedDisplayObject.addChild(container);
+        //addChild(container);
 
-        maskedDisplayObject.mask = masker;
-        addChild(maskedDisplayObject);*/
-
-        addChild(container);
-
-        renderTexture = new RenderTexture(masker.width,masker.height);
+        var renderTexture:RenderTexture = new RenderTexture(masker.width,masker.height);
         renderTexture.draw(container);
-        diaImage = new Image(renderTexture);
+        textureArray.push(renderTexture);
+        var diaImage:Image = new Image(renderTexture);
         addChild(diaImage);
+        diaImageArray.push(diaImage);
 
         if(textArray.length > 0){
             for each(var tekstData:TextField in textArray){
@@ -228,38 +221,13 @@ public class PresentationView extends Sprite{
             }
             bulletsGroupArray.splice(0);
         }
-
-        /*if(bulletsGroup != null){
-            trace("[bulletsGroup]: remove");
-            bulletsGroup.flatten();
-            bulletsGroup.dispose();
-            removeChild(bulletsGroup);
-        }*/
-        /*if(tekstVeld != null){
-            trace("[tekstVeld]: remove");
-            tekstVeld.dispose();
-            removeChild(tekstVeld);
-        }*/
-        /*if(displayedImage != null){
-            trace("[displayedImage]: remove");
-            displayedImage.dispose();
-            removeChild(displayedImage);
-
-        }*/
         if(masker != null){
-            trace("[masker]: remove");
             masker.dispose();
             removeChild(masker);
         }
         if(container != null){
-            trace("[container]: remove");
             container.dispose();
             removeChild(container);
-        }
-        if(maskedDisplayObject != null){
-            trace("[maskedDisplayObject]: remove");
-            maskedDisplayObject.dispose();
-            removeChild(maskedDisplayObject);
         }
         if(imageDataArray != null){
             imageDataArray.splice(0);

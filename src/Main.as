@@ -46,13 +46,11 @@ public class Main extends Sprite {
     }
 
     private function goFullscreen(e:Event):void{
-        //activeren fullscreen (werkt ng niet)
         stage.nativeWindow.width = Capabilities.screenResolutionX;
         stage.nativeWindow.height = Capabilities.screenResolutionY;
         appModel.appWidth = Capabilities.screenResolutionX;
         appModel.appheigth = Capabilities.screenResolutionY;
         stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-        //appModel.isFullscreen = true; NIET MEER NODIG NOG EVEN LATEN STAAN
     }
 
     private function normalView(e:Event):void{
@@ -68,7 +66,7 @@ public class Main extends Sprite {
     private function resizeHandler(event:Event):void{
         var viewPortRectangle:Rectangle = new Rectangle();
         viewPortRectangle.width = stage.stageWidth;
-        viewPortRectangle.height = stage.stageHeight
+        viewPortRectangle.height = stage.stageHeight;
 
         // resize the viewport:
         Starling.current.viewPort = viewPortRectangle;

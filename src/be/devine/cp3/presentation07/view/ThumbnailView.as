@@ -33,10 +33,8 @@ public class ThumbnailView extends Sprite{
     private var previousPage:Button;
     private var pageText:TextField;
     private var page:int;
-
-
-    //private var thumb:Thumbnail;
-    //private var backgroundThumb:Quad;
+    private var pagesTotal:int;
+    private var endSlidesNumber:int;
 
     //CONSTRUCTOR
     public function ThumbnailView() {
@@ -45,22 +43,18 @@ public class ThumbnailView extends Sprite{
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
         appModel.addEventListener(AppModel.STAGE_RESIZE, resizeHandler);
 
-        background  = new Quad(appModel.appWidth,683,0x585858);
+        background  = new Quad(appModel.appWidth,appModel.appheigth-85,0x585858);
         addChild(background);
 
         thumbContainer = new Sprite();
         addChild(thumbContainer);
 
-        // Achtergrond van de thumbs
-       /* backgroundThumb = new Quad(204, 154, 0x66b34e);
-        backgroundThumb.x = 3;
-        backgroundThumb.y = 3;
-        addChild(backgroundThumb);*/
-
     }
 
     private function xmlLoadedHandler(event:flash.events.Event):void {
         trace('[THUMBNAILVIEW]: xml loaded');
+
+        pagesTotal = Math.ceil((appModel.xmlDataArray.length - 1)/12);
 
         var xpos:uint = 5;
         var ypos:uint = 5;
@@ -75,12 +69,6 @@ public class ThumbnailView extends Sprite{
             thumb.y = ypos;
             thumbContainer.addChild(thumb);
             xpos+=210;
-            /*count++;
-            if(count == 4){
-                ypos += 160;
-                xpos = 5;
-                count = 0;
-            }  */
 
             count = thumb.id + 1;
             // Om de 4 een nieuwe rij begonnen
@@ -110,7 +98,12 @@ public class ThumbnailView extends Sprite{
                 pageContainer.addChild(nextPage);
 
                 pageText = new TextField(90, 15 ,"",'Abel',15,0xFFFFFF);
-                pageText.text = "Slide " + 1*page + " - " + 12*page ;
+                trace("sommetje: "+  uint( ((12*page)-(appModel.xmlDataArray.length)) )  );
+                endSlidesNumber = ((12*page)-(appModel.xmlDataArray.length-1));
+                if(endSlidesNumber < 0){
+                    endSlidesNumber = 0;
+                }
+                pageText.text = "Slide " + (((page-1)*12)+1) + " - " + ((12*page)- endSlidesNumber) ;
                 pageText.x = 10;
                 pageContainer.addChild(pageText);
 
@@ -118,8 +111,6 @@ public class ThumbnailView extends Sprite{
                 pageContainer.x = (background.width - pageContainer.width) /2;
                 pageContainer.y = 35;
 
-
-                //pageContainer.addChild(thumbContainer);
                 addChild(pageContainer);
             }
 
@@ -130,61 +121,48 @@ public class ThumbnailView extends Sprite{
         thumbContainer.x = (background.width - (4*thumb.width)) / 2;
         thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
 
-
     }
 
 
     private function onTouchnextPage(event:TouchEvent):void{
        if(event.getTouch(this, TouchPhase.ENDED)){
 
+           if(pagesTotal != page){
+               page ++;
+               // Vanaf je 1 keer naar de volgende pagina bent geweest kan je pas naar de vorige pagina
+               previousPage.addEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
+               thumbContainer.x -= 860;
+               endSlidesNumber = ((12*page)-(appModel.xmlDataArray.length));
+               if(endSlidesNumber < 0){
+                   endSlidesNumber = 0;
+               }
+               pageText.text = "Slide " + (((page-1)*12)+1) + " - " + ((12*page)-endSlidesNumber) ;
+           }
 
-           page ++;
-
-            // Vanaf je 1 keer naar de volgende pagina bent geweest kan je pas naar de vorige pagina
-            previousPage.addEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
-            thumbContainer.x -= 860;
-           pageText.text = "Slide " + 1*page + " - " + 12*page ;
-           trace ("[Thumbnailview]: Next Page + Pagenumber = " + page);
        }
     }
 
     private function onTouchPreviousPage(event:TouchEvent):void{
        if(event.getTouch(this, TouchPhase.ENDED)){
 
-
            page --;
-
            // Wanneer je terug op de eerste pagina bent, kan je niet meer meer terug.
-               if (page == 1){
-                   previousPage.removeEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
-               }
+           if (page == 1){
+               previousPage.removeEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
+           }
 
-            thumbContainer.x += 860;
-           pageText.text = "Slide " + 1*page + " - " + 12*page ;
-
-           trace ("[Thumbnailview]: Previous Page + Pagenumber = " + page);
-
+           thumbContainer.x += 860;
+           endSlidesNumber = ((12*page)-(appModel.xmlDataArray.length));
+           if(endSlidesNumber < 0){
+               endSlidesNumber = 0;
+           }
+           pageText.text = "Slide " + (((page-1)*12)+1) + " - " + ((12*page)-endSlidesNumber);
        }
     }
 
-    // Aanduiden van de actieve thumb
-
-
-
-    // Eerst doorgeven welke thumb er wordt gekozen
-   /* private function onTouchShowActive(event:TouchEvent):void{
-        //Als je klikt
-        if(event.getTouch(this, TouchPhase.ENDED)){
-            trace ("[ThumbnailView]CurrentTarget " + event.currentTarget);
-            var activeThumb:Thumbnail = event.currentTarget as Thumbnail;
-            backgroundThumb.x = activeThumb.x - 2;
-            backgroundThumb.y = activeThumb.y - 2;
-        }
-    }*/
-
     private function resizeHandler(event:Event):void{
         background.width = appModel.appWidth;
-        background.height = appModel.appheigth;
+        background.height = appModel.appheigth-85;
         pageContainer.x = (appModel.appWidth >> 1) - (pageContainer.width >> 1);
         thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2) + 5;
         //thumbContainer.x = (background.width - (4*thumb.width)) / 2;

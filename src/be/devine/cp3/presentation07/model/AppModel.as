@@ -1,7 +1,6 @@
 package be.devine.cp3.presentation07.model {
 import flash.events.Event;
 import flash.events.EventDispatcher;
-import flash.events.MouseEvent;
 
 public class AppModel extends EventDispatcher{
     //PROPERTIES
@@ -17,15 +16,12 @@ public class AppModel extends EventDispatcher{
     public static const XML_LOADED:String = "XML_LOADED";
     public static const PRESENTATION_STARTED:String = "PRESENTATION_STARTED";
     public static const PRESENTATION_STOPPED:String = "PRESENTATION_STOPPED";
-    // IS_FULLSCREEN KAN MSS WEG, EERST PROBLEEM MET FULLSCREEN OPLOSSEN
-    //public static const IS_FULLSCREEN:String = "IS_FULLSCREEN";
     public static const DIA_CHANGED:String = "DIA_CHANGED";
     public static const THUMB_CHANGED:String = "THUMB_CHANGED";
     public static const STAGE_RESIZE:String = "STAGE_RESIZE";
 
     private var _xmlDataArray:Array;
     private var _isPlaying:Boolean = false;
-    private var _isFullscreen:Boolean = false;
 
     private var _currentDia:int = 2;
 
@@ -88,18 +84,6 @@ public class AppModel extends EventDispatcher{
             dispatchEvent(new Event(STAGE_RESIZE));
         }
     }
-
-    /*public function get isFullscreen():Boolean {
-        return _isFullscreen;
-    }
-
-    public function set isFullscreen(value:Boolean):void {
-        if(_isFullscreen != value){
-            _isFullscreen = value;
-            dispatchEvent(new Event(IS_FULLSCREEN));
-        }
-
-    }*/
 
     public function get currentDia():int {
         return _currentDia;

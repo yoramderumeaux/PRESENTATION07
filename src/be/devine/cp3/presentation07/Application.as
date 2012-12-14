@@ -63,7 +63,6 @@ public class Application extends starling.display.Sprite{
 
     private function startPresentationHandler(event:Event){
         //tonen van presentatieView nadat de app fullscreen ging
-        trace('nu fullscreen');
         backGround = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
         addChild(backGround);
         presentationView = new PresentationView();

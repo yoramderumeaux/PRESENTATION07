@@ -14,14 +14,6 @@ public class TekstVO {
     //CONSTRUCTOR
     public function TekstVO(tekst:String, fontName:String ,fontSize:int, xpos:uint, ypos:uint, color:String, index:int, horizontalCenter:String, verticalCenter:String) {
 
-        trace('------------------');
-        trace(tekst);
-        trace(xpos);
-        trace(ypos);
-        trace(horizontalCenter);
-        trace(verticalCenter);
-        trace('------------------');
-
         this.tekst = tekst;
         this.fontName = fontName;
         this.fontSize = fontSize;

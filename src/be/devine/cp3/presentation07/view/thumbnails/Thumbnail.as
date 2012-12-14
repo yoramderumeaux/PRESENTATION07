@@ -87,9 +87,6 @@ public class Thumbnail extends Sprite{
             restOfDia();
         }
 
-
-
-
     }
 
     private function hoverHandler(event:TouchEvent):void{
