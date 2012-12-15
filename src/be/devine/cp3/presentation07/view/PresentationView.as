@@ -58,6 +58,7 @@ public class PresentationView extends Sprite{
     private var bulletsGroupArray:Array = new Array();
     private var textureArray:Array = new Array();
     private var diaImageArray:Array = new Array();
+    private var transitionMaskArray:Array = new Array();
 
     //CONSTRUCTOR
     public function PresentationView() {
@@ -82,26 +83,8 @@ public class PresentationView extends Sprite{
 
     private function renderDia():void{
 
-        //clearen van memory
-        /*if(imageQueue != null) {
-            imageQueue.removeEventListener(Event.COMPLETE, imagesComplete);
-            imageQueue.stop();
-        }*/
-
-        /*if(textureArray.length > 0){
-            for each(var textureData:RenderTexture in textureArray){
-                textureData.dispose();
-            }
-            textureArray.splice(0);
-        }
-
-        if(diaImageArray.length > 0){
-            for each(var diaImageData:Image in diaImageArray){
-                diaImageData.dispose();
-                removeChild(diaImageData);
-            }
-            diaImageArray.splice(0);
-        }*/
+        //SET TRANSITION STATE
+        appModel.transitionReady = false;
 
         //nieuwe dia maken
         dia = appModel.xmlDataArray[appModel.currentDia];
@@ -240,10 +223,30 @@ public class PresentationView extends Sprite{
         }
         if(dia.transition == 'inschuiven'){
             diaImage.y = appModel.appheigth;
-            var tween:Tween = new Tween(diaImage, 1.5,Transitions.EASE_IN_OUT);
+            var tween:Tween = new Tween(diaImage, 1,Transitions.EASE_IN_OUT);
             tween.animate("y", 0);
             Starling.juggler.add(tween);
         }
+        if(dia.transition == 'hoekTransitie'){
+
+            var transitionsMasker:Quad = new Quad(diaWidth,appModel.appheigth,0xff00ff);
+            transitionsMasker.x = -diaWidth;
+            transitionsMasker.y = -appModel.appheigth;
+
+            var maskedDisplayObject:PixelMaskDisplayObject = new PixelMaskDisplayObject();
+            maskedDisplayObject.addChild(diaImage);
+            maskedDisplayObject.mask = transitionsMasker;
+            addChild(maskedDisplayObject);
+
+            var tween:Tween = new Tween(transitionsMasker, 1,Transitions.EASE_IN_OUT);
+            tween.animate("x", 0);
+            tween.animate("y", 0);
+            Starling.juggler.add(tween);
+
+            transitionMaskArray.push(transitionsMasker);
+            transitionMaskArray.push(maskedDisplayObject);
+        }
+        trace("removedinges + lengte :" +transitionMaskArray.length);
         tween.onComplete = clearPreviousDia;
     }
 
@@ -261,7 +264,23 @@ public class PresentationView extends Sprite{
             diaImageData.dispose();
             removeChild(diaImageData);
 
+            if(transitionMaskArray.length >= 3){
+                trace('[clearTransiton]: ' +transitionMaskArray);
+                var deleteQuad = transitionMaskArray.shift();
+                var deletMask = transitionMaskArray.shift();
+
+                var quadData:Quad = deleteQuad as Quad;
+                quadData.dispose();
+
+                var maskData:PixelMaskDisplayObject = deletMask as PixelMaskDisplayObject;
+                maskData.dispose();
+                removeChild(maskData);
+                trace('[clearTransiton2]: ' +transitionMaskArray);
+            }
         }
+
+
+        appModel.transitionReady = true;
     }
 
 

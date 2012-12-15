@@ -19,9 +19,11 @@ public class AppModel extends EventDispatcher{
     public static const DIA_CHANGED:String = "DIA_CHANGED";
     public static const THUMB_CHANGED:String = "THUMB_CHANGED";
     public static const STAGE_RESIZE:String = "STAGE_RESIZE";
+    public static const TRANSITION_BUSY:String = "TRANSITION_BUSY";
 
     private var _xmlDataArray:Array;
     private var _isPlaying:Boolean = false;
+    private var _transitionReady:Boolean = true;
 
     private var _currentDia:int = 2;
 
@@ -103,6 +105,19 @@ public class AppModel extends EventDispatcher{
             dispatchEvent(new Event(DIA_CHANGED));
 
         }
+    }
+
+    public function get transitionReady():Boolean {
+        return _transitionReady;
+    }
+
+    public function set transitionReady(value:Boolean):void {
+        if(_transitionReady != value){
+            trace('[APPMODEL] transitionReadySate: ' + _transitionReady);
+            _transitionReady = value;
+            dispatchEvent(new Event(TRANSITION_BUSY));
+        }
+
     }
 }
 }

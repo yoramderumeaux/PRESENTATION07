@@ -41,6 +41,7 @@ public class Application extends starling.display.Sprite{
         appModel.addEventListener(AppModel.PRESENTATION_STARTED, startPresentationHandler);
         appModel.addEventListener(AppModel.PRESENTATION_STOPPED, stopPresentationHandler);
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
+        appModel.addEventListener(AppModel.TRANSITION_BUSY, transitionKeyboardHandler);
 
         thumbnailView = new ThumbnailView();
         thumbnailView.y = 85;
@@ -61,7 +62,7 @@ public class Application extends starling.display.Sprite{
         stage.addEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
     }
 
-    private function startPresentationHandler(event:Event){
+    private function startPresentationHandler(event:Event):void{
         //tonen van presentatieView nadat de app fullscreen ging
         backGround = new Quad(appModel.appWidth, appModel.appheigth, 0x000000);
         addChild(backGround);
@@ -70,7 +71,7 @@ public class Application extends starling.display.Sprite{
         addChild(presentationView);
     }
 
-    private function stopPresentationHandler(event:Event){
+    private function stopPresentationHandler(event:Event):void{
         //verwijder presentatie
         trace("[application]: presentatie stopped");
         if(presentationView != null){
@@ -83,7 +84,7 @@ public class Application extends starling.display.Sprite{
 
     private function keyBoardHandler(event:starling.events.KeyboardEvent):void{
         //keyboard events tijdens het presenteren
-        trace(event.keyCode);
+        trace("er wordt gedrukt");
         if(appModel.isPlaying == true){
             switch (event.keyCode){
                 case 39:
@@ -115,6 +116,19 @@ public class Application extends starling.display.Sprite{
 
     private function keyBoardUPHandler(event:starling.events.KeyboardEvent):void{
         stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
+    }
+
+    private function transitionKeyboardHandler(event:Event):void{
+        trace("event gestuurd");
+        if(appModel.transitionReady == false){
+            trace("key removed");
+            stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
+            stage.removeEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
+        }else{
+            trace("key added");
+            stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
+            stage.addEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
+        }
     }
 
 }
