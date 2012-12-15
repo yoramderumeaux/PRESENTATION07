@@ -27,6 +27,7 @@ public class Application extends starling.display.Sprite{
 
     private var presentationView:PresentationView;
     private var backGround:Quad;
+    private var myTimer:Timer;
 
     [Embed(source="../../../../assets/spriteSheets/uiElements.xml", mimeType="application/octet-stream")]
     public static const uiXml:Class;
@@ -57,9 +58,6 @@ public class Application extends starling.display.Sprite{
 
         //xml initieel inladen
         var xmlService:XmlService = new XmlService("assets/xml/startPresentatie.xml");
-
-        //eventlistener koppelen voor keyboard... controleer in functie of de presentatie bzig is of nie
-
     }
 
     private function xmlLoadedHandler(event:Event):void{
@@ -75,32 +73,14 @@ public class Application extends starling.display.Sprite{
         presentationView.x = (appModel.appWidth >> 1) - (presentationView.diaWidth >> 1);
         addChild(presentationView);
 
-        addEventListener(TouchEvent.TOUCH, onTouchShowMenu);
-
-    }
-
-    private function onTouchShowMenu(event:TouchEvent):void{
-
-        removeEventListener(TouchEvent.TOUCH, onTouchShowMenu);
         options = new MenuSlideView();
         addChild(options);
 
-        var myTimer:Timer = new Timer(1000, 3);
-        myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
-        myTimer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
-        myTimer.start();
-
-
-    }
-
-    public function timerHandler(event:TimerEvent):void {
-        trace("[APPLICATION]: Ik ben aan het timen");
-    }
-
-    private function timerCompleteHandler(event:TimerEvent):void{
-        trace ("[APPLICATION]: Timercompleet");
-        removeChild(options);
         addEventListener(TouchEvent.TOUCH, onTouchShowMenu);
+    }
+
+    private function onTouchShowMenu(event:TouchEvent):void{
+        options.onTouchShowMenu(null);
     }
 
     private function stopPresentationHandler(event:Event):void{
@@ -111,6 +91,10 @@ public class Application extends starling.display.Sprite{
             removeChild(presentationView);
             backGround.dispose();
             removeChild(backGround);
+        }
+        if(options != null){
+            options.dispose();
+            removeChild(options);
         }
     }
 

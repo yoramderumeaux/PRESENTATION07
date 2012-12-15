@@ -47,6 +47,7 @@ public class XmlService extends EventDispatcher{
             for each(var textNode:XML in diaNode.text){
                 var tekst:TekstVO = new TekstVO(textNode, textNode.@fontname,textNode.@fontsize, textNode.@xpos, textNode.@ypos, textNode.@color,textNode.@index, textNode.@horizontalCenter, textNode.@verticalCenter);
                 tekstArray.push(tekst);
+                trace(diaNode.text);
             }
 
             for each(var imageNode:XML in diaNode.image){

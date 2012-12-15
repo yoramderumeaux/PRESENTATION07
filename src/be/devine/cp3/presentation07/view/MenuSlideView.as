@@ -9,10 +9,17 @@ package be.devine.cp3.presentation07.view {
 import be.devine.cp3.presentation07.Application;
 import be.devine.cp3.presentation07.model.AppModel;
 
+import flash.events.Event;
+
+import flash.events.TimerEvent;
+
+import flash.utils.Timer;
+
 import starling.display.Button;
 import starling.display.Quad;
 
 import starling.display.Sprite;
+import starling.display.Stage;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
 import starling.text.TextField;
@@ -41,8 +48,7 @@ public class MenuSlideView extends Sprite{
     private var countBackground:Quad;
 
     private var infoContainer:Sprite;
-
-
+    private var myTimer:Timer;
 
     // ***********************
     //      Constructor
@@ -50,46 +56,40 @@ public class MenuSlideView extends Sprite{
     public function MenuSlideView() {
 
         this.appModel = AppModel.getInstance();
+        appModel.addEventListener(AppModel.DIA_CHANGED, updateTextField);
+        appModel.addEventListener(AppModel.TRANSITION_BUSY, transitionKeyboardHandler);
         infoContainer = new Sprite();
 
         // Next button aanmaken
         nextSlide = new Button(atlas.getTexture('nextSlide'));
         nextSlide.x = 50;
         nextSlide.y = (appModel.appheigth - nextSlide.height) /2;
-        addChild(nextSlide);
 
         // Previous button aanmaken
         previousSlide = new Button(atlas.getTexture('previousSlide'));
         previousSlide.x = appModel.appWidth - 50 - previousSlide.width;
         previousSlide.y = (appModel.appheigth - previousSlide.height) /2;
-        addChild(previousSlide);
 
         // Quit Presentation
         stopBackground = new Quad(286, 84, 0x000000, 59);
         stopBackground.x = 0;
         stopBackground.y = 0;
-        infoContainer.addChild(stopBackground);
 
         stopPresentation = new TextField(286,84,"Stop presentation",'Abel',30,0xFFFFFF);
         stopPresentation.x = 0;
         stopPresentation.y = 0;
-        infoContainer.addChild(stopPresentation);
 
         // Slide Count
         countBackground = new Quad(286, 84, 0x000000, 59);
         countBackground.x = 300;
         countBackground.y = 0;
-        infoContainer.addChild(countBackground);
 
         slideCount = new TextField(286,84,"Slide " + (appModel.currentDia + 1),'Abel',30,0xFFFFFF);
         slideCount.x = 300;
         slideCount.y = 0;
-        infoContainer.addChild(slideCount);
 
-        addChild(infoContainer);
-        infoContainer.x = (appModel.appWidth - infoContainer.width) / 2;
-        infoContainer.y = (appModel.appheigth - infoContainer.height);
-
+        myTimer = new Timer(3000, 1);
+        myTimer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
 
         // Toevoegen van Event Listeners
 
@@ -100,7 +100,6 @@ public class MenuSlideView extends Sprite{
         // Previous slide
         nextSlide.addEventListener(TouchEvent.TOUCH, onTouchPreviousSlide);
         previousSlide.addEventListener(TouchEvent.TOUCH, onTouchNextSlide);
-
     }
 
 
@@ -110,23 +109,61 @@ public class MenuSlideView extends Sprite{
 
     private function onTouchStopPresentation(event:TouchEvent):void{
         if(event.getTouch(this, TouchPhase.ENDED)){
-            trace ("[MENUSLIDEVIEW] Ik stop de presentatie met de QUIT PRESENTATION - button");
             appModel.isPlaying = false;
         }
     }
 
     private function onTouchPreviousSlide(event:TouchEvent):void{
         if(event.getTouch(this, TouchPhase.ENDED)){
-            trace ("[MENUSLIDEVIEW] ga naar de vorige slide met de button");
             appModel.currentDia --;
         }
     }
 
     private function onTouchNextSlide(event:TouchEvent):void{
         if(event.getTouch(this, TouchPhase.ENDED)){
-            trace ("[MENUSLIDEVIEW] ga naar de volgende slide met de button");
             appModel.currentDia ++;
         }
     }
+
+    private function updateTextField(event:Event):void{
+        slideCount.text = "Slide " + (appModel.currentDia + 1);
+    }
+
+    private function timerCompleteHandler(event:TimerEvent):void{
+        removeChild(nextSlide);
+        removeChild(previousSlide);
+        infoContainer.removeChild(stopBackground);
+        infoContainer.removeChild(countBackground);
+        infoContainer.removeChild(slideCount);
+        infoContainer.removeChild(stopPresentation);
+        removeChild(infoContainer);
+    }
+
+    public function onTouchShowMenu(event:TouchEvent):void{
+        if(myTimer != null){
+            addChild(nextSlide);
+            addChild(previousSlide);
+            infoContainer.addChild(stopBackground);
+            infoContainer.addChild(countBackground);
+            infoContainer.addChild(slideCount);
+            infoContainer.addChild(stopPresentation);
+            addChild(infoContainer);
+            infoContainer.x = (appModel.appWidth - infoContainer.width) / 2;
+            infoContainer.y = (appModel.appheigth - infoContainer.height);
+
+            myTimer.start();
+        }
+    }
+
+    private function transitionKeyboardHandler(event:Event):void{
+        if(appModel.transitionReady == false){
+            nextSlide.removeEventListener(TouchEvent.TOUCH, onTouchPreviousSlide);
+            previousSlide.removeEventListener(TouchEvent.TOUCH, onTouchNextSlide);
+        }else{
+            nextSlide.addEventListener(TouchEvent.TOUCH, onTouchPreviousSlide);
+            previousSlide.addEventListener(TouchEvent.TOUCH, onTouchNextSlide);
+        }
+    }
+
 }
 }
