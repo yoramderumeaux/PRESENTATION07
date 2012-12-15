@@ -2,22 +2,27 @@ package be.devine.cp3.presentation07 {
 
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.services.XmlService;
+import be.devine.cp3.presentation07.view.MenuSlideView;
 import be.devine.cp3.presentation07.view.MenuView;
 import be.devine.cp3.presentation07.view.PresentationView;
 import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
+import flash.events.TimerEvent;
+import flash.utils.Timer;
 
 import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.events.KeyboardEvent;
+import starling.events.TouchEvent;
 
 public class Application extends starling.display.Sprite{
     //PROPERTIES
     private var appModel:AppModel;
     private var menuView:MenuView;
     private var thumbnailView:ThumbnailView;
+    private var options:MenuSlideView;
 
 
     private var presentationView:PresentationView;
@@ -69,6 +74,33 @@ public class Application extends starling.display.Sprite{
         presentationView = new PresentationView();
         presentationView.x = (appModel.appWidth >> 1) - (presentationView.diaWidth >> 1);
         addChild(presentationView);
+
+        addEventListener(TouchEvent.TOUCH, onTouchShowMenu);
+
+    }
+
+    private function onTouchShowMenu(event:TouchEvent):void{
+
+        removeEventListener(TouchEvent.TOUCH, onTouchShowMenu);
+        options = new MenuSlideView();
+        addChild(options);
+
+        var myTimer:Timer = new Timer(1000, 3);
+        myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
+        myTimer.addEventListener(TimerEvent.TIMER_COMPLETE, timerCompleteHandler);
+        myTimer.start();
+
+
+    }
+
+    public function timerHandler(event:TimerEvent):void {
+        trace("[APPLICATION]: Ik ben aan het timen");
+    }
+
+    private function timerCompleteHandler(event:TimerEvent):void{
+        trace ("[APPLICATION]: Timercompleet");
+        removeChild(options);
+        addEventListener(TouchEvent.TOUCH, onTouchShowMenu);
     }
 
     private function stopPresentationHandler(event:Event):void{
@@ -84,20 +116,20 @@ public class Application extends starling.display.Sprite{
 
     private function keyBoardHandler(event:starling.events.KeyboardEvent):void{
         //keyboard events tijdens het presenteren
-        trace("er wordt gedrukt");
+        trace("[APPLICATION] Er wordt een key ingeduwd");
         if(appModel.isPlaying == true){
             switch (event.keyCode){
                 case 39:
-                    trace("right");
+                    trace("[APPLICATION]: right");
                     appModel.currentDia++;
                     break;
 
                 case 37:
-                    trace("left");
+                    trace("[APPLICATION]: left");
                     appModel.currentDia--;
                     break;
                 case 32:
-                    trace("space");
+                    trace("[APPLICATION]: space");
                     appModel.isPlaying = false;
                     break;
             }
@@ -105,7 +137,7 @@ public class Application extends starling.display.Sprite{
         }else{
             switch (event.keyCode){
                 case 32:
-                    trace("space");
+                    trace("[APPLICATION]: space");
                     stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
                     appModel.isPlaying = true;
                     break;
