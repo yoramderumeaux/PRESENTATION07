@@ -24,6 +24,7 @@ public class TekstVO {
         this.horizontalCenter = horizontalCenter;
         this.verticalCenter = verticalCenter;
 
+        //github refresh?
     }
 }
 }
