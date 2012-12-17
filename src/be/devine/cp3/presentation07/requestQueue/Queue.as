@@ -37,10 +37,13 @@ public class Queue extends EventDispatcher{
 
     public function stop():void{
         //code schrijven die in tasks, currentTask en completedtasks event listeners removed
-        //currentTask.removeEventListener(Event.COMPLETE,currentTaskCompleteHandler);
-        tasks.splice(0);
-        completedTasks.splice(0);
-        currentTask = null;
+        if(currentTask != null){
+            currentTask.removeEventListener(Event.COMPLETE,currentTaskCompleteHandler);
+            tasks.splice(0);
+            completedTasks.splice(0);
+            currentTask = null;
+        }
+
         //arrays leegmaken, instellen currentTask op null
     }
 

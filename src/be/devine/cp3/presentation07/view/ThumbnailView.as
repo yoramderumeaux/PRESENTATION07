@@ -46,6 +46,7 @@ public class ThumbnailView extends Sprite{
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.XML_LOADED, xmlLoadedHandler);
         appModel.addEventListener(AppModel.STAGE_RESIZE, resizeHandler);
+        appModel.addEventListener(AppModel.PRESENTATION_STOPPED, updatePage);
 
         background  = new Quad(appModel.appWidth,appModel.appheigth-85,0x585858);
         addChild(background);
@@ -125,14 +126,14 @@ public class ThumbnailView extends Sprite{
         thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
         thumbContainer.y = (background.height - thumbContainer.height) / 2 ;
 
-        /*mask = new Quad(840,600,0xff0000);
+        mask = new Quad(840,600,0xff0000);
         mask.x = thumbContainer.x;
         mask.y = thumbContainer.y;
 
         maskedDisplayObject = new PixelMaskDisplayObject();
         maskedDisplayObject.addChild(thumbContainer);
         maskedDisplayObject.mask = mask;
-        addChild(maskedDisplayObject);*/
+        addChild(maskedDisplayObject);
     }
 
 
@@ -177,14 +178,33 @@ public class ThumbnailView extends Sprite{
         background.height = appModel.appheigth-85;
         pageContainer.x = (appModel.appWidth >> 1) - (pageContainer.width >> 1);
         thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
-        //mask.x = thumbContainer.x;
+        mask.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
         //mask.y = thumbContainer.y;
-
-        //maskedDisplayObject.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2) + 5;
+        //maskedDisplayObject.x = (appModel.appWidth >> 1) - (maskedDisplayObject.width >> 2);
        // thumbContainer.x = (background.width - (4*thumb.width)) / 2;
     }
 
+    private function updatePage(event:Event):void{
+        //Na het stoppen van de presentatie, de pagina juist zetten.
+        var currentPage = Math.ceil((appModel.currentDia+1)/12);
 
+        page = 1;
+
+        for(var i:uint = 1; i < currentPage;i++){
+            if(pagesTotal != page){
+                page ++;
+                // Vanaf je 1 keer naar de volgende pagina bent geweest kan je pas naar de vorige pagina
+                previousPage.addEventListener(TouchEvent.TOUCH, onTouchPreviousPage);
+                thumbContainer.x -= 860;
+                endSlidesNumber = ((12*page)-(appModel.xmlDataArray.length));
+                if(endSlidesNumber < 0){
+                    endSlidesNumber = 0;
+                }
+                pageText.text = "Slide " + (((page-1)*12)+1) + " - " + ((12*page)-endSlidesNumber) ;
+            }
+        }
+
+    }
 
 
 }

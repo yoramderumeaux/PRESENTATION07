@@ -1,0 +1,223 @@
+<dias>
+    <!-- Alle hoogtes, breedtes, xpos, ypos,... zijn berekent voor een dia van 800x600 en worden via een ratio omgerekent voor de screen size in kwestie -->
+    <!-- We beginnen bij DIA ID 1 omdat het anders niet uitkomt voor de layout in de thumbnail overzicht -->
+
+    <dia id = "0">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image1.jpg</image>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Trip naar Noorwegen</text>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "1">
+		<backgroundColor index = "0">0xe3e3e3</backgroundColor>
+		<text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dag één: Ålborg</text>
+		<text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Een stadje in het Noorden van Denemarken.</text>
+		<image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image2.jpg</image>
+        <transition>hoekTransitie</transition>
+	</dia>
+
+    <dia id = "2">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "30" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">'s Avonds namen we de boot naar Noorwegen</text>
+        <text fontname = "Abel" fontsize = "18" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Dat was nogal een avontuur zeg! Zoveel wind en golven. Ho ho!</text>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image3.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image4.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "3">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Overzicht van dag één</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Het rijden naar Ålborg duurde zeer lang. Desalniettemin was het leuk. We zongen mee met de liedjes in de auto.</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "315" color = "0x6d6d6d" index = "3">We moesten lang wachten, maar we mochten eindelijk op de boot. De trip viel best mee, alleen was er veel wind en dus veel golven en waren er een paar mensen zeeziek (maar wij niet hoor!) Toen we eindelijk in ons hotel aankwamen waren we dan ook té blij en vielen we als een blok in slaap.</text>
+        <transition>fade</transition>
+    </dia>
+
+
+
+    <dia id = "4">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dag twee: Sandness</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">De verkenning in Noorwegen start.</text>
+        <image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image5.jpg</image>
+        <transition>fade</transition>
+    </dia>
+
+
+    <dia id = "5">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Noorwegen appreciation time!</text>
+        <bullets fontname = "Abel" fontsize = "22" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
+            <bullet>De bergen zijn zo mooi.</bullet>
+            <bullet>Hoeveel natuur past er in een land? Crazy!</bullet>
+            <bullet>Ik kijk er naar uit om herten te zien </bullet>
+            <bullet>Er is altijd wel iets moois als je naar buiten kijkt</bullet>
+            <bullet>En het regent niet constant, we hebben geluk!</bullet>
+        </bullets>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "6">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Litago melkproducten</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Nom nom nom</text>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image6.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image7.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "7">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image8.jpg</image>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dag drie: Avonturieren</text>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "8">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Overzicht van dag drie</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">'s Morgens deden we een ochtendwandeling rond een meer. We genoten van de natuur en keken onze ogen uit. Het was ook goed weer, dus we konden zelfs in onze lichte truien rondlopen. </text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "315" color = "0x6d6d6d" index = "3">'s Middags besloten we dan om Preikestolen te bezoeken. Meer hierover in de komende slides.</text>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "9">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image9.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "10">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "30" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Wat is Preikestolen?</text>
+        <text fontname = "Abel" fontsize = "18" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">Sterven. En doodgaan. 2 uur omhoog stappen en 2 uur terug naar beneden. Er is geen wandelpad, of ja: er is een pad maar dit zijn losse stenen. Maar het was allemaal de moeite waard.</text>
+        <image width = "300" height = "300" xpos = "65" ypos = "250" index = "3">assets/images/image10.jpg</image>
+        <image width = "300" height = "300" xpos = "420" ypos = "250" index = "4">assets/images/image11.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "11">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image12.jpg</image>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Waarvoor je de preikestolen beklimt</text>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "12">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Enkele tips voor het klimmen</text>
+        <bullets fontname = "Abel" fontsize = "15" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
+            <bullet>Neem zeker genoeg drinken mee.</bullet>
+            <bullet>Vertrek vroeg genoeg. (Je wilt dit écht niet in het donker doen)</bullet>
+            <bullet>Doe deftige schoenen aan.</bullet>
+            <bullet>Vergeet je fotocamera zeker niet, want het is echt de moeite! </bullet>
+            <bullet>En geniet er gewoon van</bullet>
+        </bullets>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "13">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dag vier: Stavanger</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Vierde grootste stad van Noorwegen. Gelegen in het Westen.</text>
+        <image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image13.jpg</image>
+        <transition>hoekTransitie</transition>
+    </dia>
+
+    <dia id = "14">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Overzicht van dag vijf</text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">We besloten om te veranderen van plaats. We reden random met de auto een beetje in het rond (wel terug naar Kristiansand, waar we uiteindelijk terug op de boot moesten). We keken alweer onze ogen uit, zagen mooie natuur en uiteindelijk belandden we in Tsjørholm.  </text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "65" ypos = "315" color = "0x6d6d6d" index = "3">We huurden op een camping en huytte (eigenlijk gewoon een soort cabine). De camping had een coole waterval. 's Avonds maakten we nog een kleine wandeling in de buurt.</text>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "15">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "30" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Enkele beelden</text>
+        <image width = "200" height = "150" xpos = "65" ypos = "150" index = "2">assets/images/image14.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "150" index = "3">assets/images/image15.jpg</image>
+        <image width = "200" height = "150" xpos = "65" ypos = "350" index = "4">assets/images/image16.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "350" index = "5">assets/images/image17.jpg</image>
+        <transition>hoekTransitie</transition>
+    </dia>
+
+    <dia id = "16">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image18.jpg</image>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Op dag 6 bezochten we Lyseboten</text>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "17">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Hoe geraak je in Lyseboten?</text>
+        <bullets fontname = "Abel" fontsize = "15" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
+            <bullet>Met de auto. </bullet>
+            <bullet>Of de ferry.</bullet>
+            <bullet>Indien met de auto dan moet je door 20 haarspeldbochten.</bullet>
+            <bullet>Waarvan er 2 gelegen zijn in een tunnel</bullet>
+            <bullet>Gene zever.</bullet>
+        </bullets>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "18">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "18" horizontalCenter = "true"  verticalCenter = "false" xpos = "65" ypos = "185" color = "0x6d6d6d" index = "2">We misten net de ferry naar Stavanger en zagen schapen chillen in het midden van de weg</text>
+        <image width = "300" height = "225" xpos = "65" ypos = "250" index = "3">assets/images/image19.jpg</image>
+        <image width = "300" height = "225" xpos = "420" ypos = "250" index = "4">assets/images/image20.jpg</image>
+        <transition>hoekTransitie</transition>
+    </dia>
+
+    <dia id = "19">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "30" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Op de voorlaatste dag gingen we wandelen</text>
+        <image width = "200" height = "150" xpos = "65" ypos = "150" index = "2">assets/images/image21.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "150" index = "3">assets/images/image22.jpg</image>
+        <image width = "200" height = "150" xpos = "65" ypos = "350" index = "4">assets/images/image23.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "350" index = "5">assets/images/image24.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "20">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Dag 8: Terug naar huis </text>
+        <text fontname = "Abel" fontsize = "22" horizontalCenter = "false"  verticalCenter = "false" xpos = "34" ypos = "134" index = "2">Maar eerst nog een dagje Kristiansand</text>
+        <image width = "800" height = "600" xpos = "0" ypos = "190" index = "3">assets/images/image25.jpg</image>
+        <transition>hoekTransitie</transition>
+    </dia>
+
+    <dia id = "21">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "30" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "80" color = "0x66b34e" index = "1">Kristiansand</text>
+        <image width = "200" height = "150" xpos = "65" ypos = "150" index = "2">assets/images/image26.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "150" index = "3">assets/images/image27.jpg</image>
+        <image width = "200" height = "150" xpos = "65" ypos = "350" index = "4">assets/images/image28.jpg</image>
+        <image width = "200" height = "150" xpos = "420" ypos = "350" index = "5">assets/images/image29.jpg</image>
+        <transition>inschuiven</transition>
+    </dia>
+
+    <dia id = "22">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <image width = "800" height = "600" xpos = "0" ypos = "0" index = "1">assets/images/image30.jpg</image>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "500" ypos = "45" color = "0xffffff" index = "2">Dag 9: De terugweg naar België</text>
+        <transition>fade</transition>
+    </dia>
+
+    <dia id = "23">
+        <backgroundColor index = "0">0xe3e3e3</backgroundColor>
+        <text fontname = "Abel" fontsize = "40" horizontalCenter = "true"  verticalCenter = "false" xpos = "0" ypos = "45" color = "0x66b34e" index = "1">Noorwegen in een paar woorden:</text>
+        <bullets fontname = "Abel" fontsize = "15" xpos = "65" ypos = "180" color = "0x6d6d6d" index = "2">
+            <bullet>Betoverend mooi</bullet>
+            <bullet>De moeite</bullet>
+            <bullet>Fantastisch</bullet>
+            <bullet>Beste vakantie ever</bullet>
+        </bullets>
+        <image width = "350" height = "263" horizontalCenter = "true" xpos = "250" ypos = "300" index = "5">assets/images/image31.jpg</image>
+        <transition>fade</transition>
+
+    </dia>
+
+</dias>

@@ -70,30 +70,11 @@ public class PresentationView extends Sprite{
 
         options = new MenuSlideView();
 
-
-
         renderDia();
-
-
 
     }
 
     //METHODS
-
-    private function onTouchShowMenu(event:TouchEvent):void{
-
-        if(event.getTouch(this, TouchPhase.HOVER)){
-
-
-
-        }else{
-            //container.removeChild(ballonImage);
-            //container.removeChild(infoTekst);
-        }
-
-    }
-
-
     private function changeDiaHandler(event:Event):void{
         renderDia();
     }
@@ -296,6 +277,7 @@ public class PresentationView extends Sprite{
 
                 var quadData:Quad = deleteQuad as Quad;
                 quadData.dispose();
+                removeChild(quadData);
 
                 var maskData:PixelMaskDisplayObject = deletMask as PixelMaskDisplayObject;
                 maskData.dispose();
@@ -308,7 +290,33 @@ public class PresentationView extends Sprite{
         appModel.transitionReady = true;
     }
 
+    public function clearData():void{
 
+        if(imageQueue != null){
+            imageQueue.stop();
+        }
+
+        for(var i:uint = 0; transitionMaskArray.length > i; i++){
+            if(transitionMaskArray[i] is Quad){
+                var quads:Quad = transitionMaskArray[i];
+                quads.dispose();
+                removeChild(quads);
+            }
+            if(transitionMaskArray[i] is PixelMaskDisplayObject){
+                var mask:PixelMaskDisplayObject = transitionMaskArray[i];
+                mask.dispose();
+                removeChild(mask);
+            }
+        }
+
+        for each(var textures:RenderTexture in textureArray){
+            textures.dispose();
+        }
+        for each(var images:Image in diaImageArray){
+            images.dispose();
+            removeChild(images);
+        }
+    }
 
 }
 }

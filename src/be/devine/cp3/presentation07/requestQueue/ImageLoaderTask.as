@@ -17,6 +17,10 @@ public class ImageLoaderTask extends Loader implements IQueueTask{
         this.load(new URLRequest(imageUrl));
     }
 
+    public function stop():void{
+        this.contentLoaderInfo.removeEventListener(Event.COMPLETE, completeHandler);
+    }
+
     private function completeHandler(event:Event):void {
         this.dispatchEvent(new Event(Event.COMPLETE));
     }

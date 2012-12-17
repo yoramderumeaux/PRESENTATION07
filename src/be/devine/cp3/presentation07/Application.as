@@ -24,10 +24,8 @@ public class Application extends starling.display.Sprite{
     private var thumbnailView:ThumbnailView;
     private var options:MenuSlideView;
 
-
     private var presentationView:PresentationView;
     private var backGround:Quad;
-    private var myTimer:Timer;
 
     [Embed(source="../../../../assets/spriteSheets/uiElements.xml", mimeType="application/octet-stream")]
     public static const uiXml:Class;
@@ -87,6 +85,8 @@ public class Application extends starling.display.Sprite{
         //verwijder presentatie
         trace("[application]: presentatie stopped");
         if(presentationView != null){
+            presentationView.clearData();
+
             presentationView.dispose();
             removeChild(presentationView);
             backGround.dispose();
@@ -135,13 +135,10 @@ public class Application extends starling.display.Sprite{
     }
 
     private function transitionKeyboardHandler(event:Event):void{
-        trace("event gestuurd");
         if(appModel.transitionReady == false){
-            trace("key removed");
             stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
             stage.removeEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
         }else{
-            trace("key added");
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
             stage.addEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
         }
