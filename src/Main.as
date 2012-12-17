@@ -27,6 +27,7 @@ public class Main extends Sprite {
         stage.nativeWindow.width = 1024;
         stage.nativeWindow.height = 768;
 
+        //github push test, fixed?
 
         starling = new Starling(Application,stage);
         starling.start();
