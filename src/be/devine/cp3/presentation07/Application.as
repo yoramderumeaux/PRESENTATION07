@@ -2,23 +2,27 @@ package be.devine.cp3.presentation07 {
 
 import be.devine.cp3.presentation07.model.AppModel;
 import be.devine.cp3.presentation07.services.XmlService;
+import be.devine.cp3.presentation07.view.MenuSlideView;
 import be.devine.cp3.presentation07.view.MenuView;
 import be.devine.cp3.presentation07.view.PresentationView;
 import be.devine.cp3.presentation07.view.ThumbnailView;
 
 import flash.events.Event;
+import flash.events.TimerEvent;
+import flash.utils.Timer;
 
 import starling.display.Quad;
 
 import starling.display.Sprite;
 import starling.events.KeyboardEvent;
+import starling.events.TouchEvent;
 
 public class Application extends starling.display.Sprite{
     //PROPERTIES
     private var appModel:AppModel;
     private var menuView:MenuView;
     private var thumbnailView:ThumbnailView;
-
+    private var options:MenuSlideView;
 
     private var presentationView:PresentationView;
     private var backGround:Quad;
@@ -52,9 +56,6 @@ public class Application extends starling.display.Sprite{
 
         //xml initieel inladen
         var xmlService:XmlService = new XmlService("assets/xml/startPresentatie.xml");
-
-        //eventlistener koppelen voor keyboard... controleer in functie of de presentatie bzig is of nie
-
     }
 
     private function xmlLoadedHandler(event:Event):void{
@@ -69,35 +70,50 @@ public class Application extends starling.display.Sprite{
         presentationView = new PresentationView();
         presentationView.x = (appModel.appWidth >> 1) - (presentationView.diaWidth >> 1);
         addChild(presentationView);
+
+        options = new MenuSlideView();
+        addChild(options);
+
+        addEventListener(TouchEvent.TOUCH, onTouchShowMenu);
+    }
+
+    private function onTouchShowMenu(event:TouchEvent):void{
+        options.onTouchShowMenu(null);
     }
 
     private function stopPresentationHandler(event:Event):void{
         //verwijder presentatie
         trace("[application]: presentatie stopped");
         if(presentationView != null){
+            presentationView.clearData();
+
             presentationView.dispose();
             removeChild(presentationView);
             backGround.dispose();
             removeChild(backGround);
         }
+        if(options != null){
+            options.dispose();
+            removeChild(options);
+        }
     }
 
     private function keyBoardHandler(event:starling.events.KeyboardEvent):void{
         //keyboard events tijdens het presenteren
-        trace("er wordt gedrukt");
+        trace("[APPLICATION] Er wordt een key ingeduwd");
         if(appModel.isPlaying == true){
             switch (event.keyCode){
                 case 39:
-                    trace("right");
+                    trace("[APPLICATION]: right");
                     appModel.currentDia++;
                     break;
 
                 case 37:
-                    trace("left");
+                    trace("[APPLICATION]: left");
                     appModel.currentDia--;
                     break;
                 case 32:
-                    trace("space");
+                    trace("[APPLICATION]: space");
                     appModel.isPlaying = false;
                     break;
             }
@@ -105,7 +121,7 @@ public class Application extends starling.display.Sprite{
         }else{
             switch (event.keyCode){
                 case 32:
-                    trace("space");
+                    trace("[APPLICATION]: space");
                     stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
                     appModel.isPlaying = true;
                     break;
@@ -119,13 +135,10 @@ public class Application extends starling.display.Sprite{
     }
 
     private function transitionKeyboardHandler(event:Event):void{
-        trace("event gestuurd");
         if(appModel.transitionReady == false){
-            trace("key removed");
             stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
             stage.removeEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
         }else{
-            trace("key added");
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyBoardHandler);
             stage.addEventListener(KeyboardEvent.KEY_UP, keyBoardUPHandler);
         }

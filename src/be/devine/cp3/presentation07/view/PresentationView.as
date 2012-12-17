@@ -1,4 +1,10 @@
 package be.devine.cp3.presentation07.view {
+import be.devine.cp3.presentation07.Application;
+import starling.display.Button;
+import starling.events.TouchEvent;
+import starling.events.TouchPhase;
+import starling.textures.Texture;
+import starling.textures.TextureAtlas;
 import be.devine.cp3.presentation07.VO.BulletsVO;
 import be.devine.cp3.presentation07.VO.DiaVO;
 import be.devine.cp3.presentation07.VO.ImageVO;
@@ -10,25 +16,15 @@ import be.devine.cp3.presentation07.requestQueue.ImageLoaderTask;
 import be.devine.cp3.presentation07.requestQueue.Queue;
 import be.devine.cp3.presentation07.requestQueue.URLLoaderTask;
 import be.devine.cp3.presentation07.view.dias.Dia;
-
 import flash.display.Bitmap;
-
 import flash.display.BitmapData;
-
 import flash.display.DisplayObject;
-
-
 import flash.events.Event;
-
 import starling.animation.Transitions;
-
 import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.Image;
-
-
 import starling.display.Quad;
-
 import starling.display.Sprite;
 import starling.text.TextField;
 import starling.textures.RenderTexture;
@@ -60,12 +56,22 @@ public class PresentationView extends Sprite{
     private var diaImageArray:Array = new Array();
     private var transitionMaskArray:Array = new Array();
 
+    private var options:MenuSlideView;
+
+    //atlas van spriteSheet aanmaken
+    private var texture:Texture = Texture.fromBitmap(new Application.uiTexture());
+    private var xml:XML = XML(new Application.uiXml());
+    private var atlas:TextureAtlas = new TextureAtlas(texture,xml);
+
     //CONSTRUCTOR
     public function PresentationView() {
         this.appModel = AppModel.getInstance();
         appModel.addEventListener(AppModel.DIA_CHANGED, changeDiaHandler);
 
+        options = new MenuSlideView();
+
         renderDia();
+
     }
 
     //METHODS
@@ -271,6 +277,7 @@ public class PresentationView extends Sprite{
 
                 var quadData:Quad = deleteQuad as Quad;
                 quadData.dispose();
+                removeChild(quadData);
 
                 var maskData:PixelMaskDisplayObject = deletMask as PixelMaskDisplayObject;
                 maskData.dispose();
@@ -283,6 +290,33 @@ public class PresentationView extends Sprite{
         appModel.transitionReady = true;
     }
 
+    public function clearData():void{
+
+        if(imageQueue != null){
+            imageQueue.stop();
+        }
+
+        for(var i:uint = 0; transitionMaskArray.length > i; i++){
+            if(transitionMaskArray[i] is Quad){
+                var quads:Quad = transitionMaskArray[i];
+                quads.dispose();
+                removeChild(quads);
+            }
+            if(transitionMaskArray[i] is PixelMaskDisplayObject){
+                var mask:PixelMaskDisplayObject = transitionMaskArray[i];
+                mask.dispose();
+                removeChild(mask);
+            }
+        }
+
+        for each(var textures:RenderTexture in textureArray){
+            textures.dispose();
+        }
+        for each(var images:Image in diaImageArray){
+            images.dispose();
+            removeChild(images);
+        }
+    }
 
 }
 }

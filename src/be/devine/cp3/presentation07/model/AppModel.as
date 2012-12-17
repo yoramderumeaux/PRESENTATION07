@@ -15,7 +15,7 @@ public class AppModel extends EventDispatcher{
 
     public static const XML_LOADED:String = "XML_LOADED";
     public static const PRESENTATION_STARTED:String = "PRESENTATION_STARTED";
-    public static const PRESENTATION_STOPPED:String = "PRESENTATION_STOPPED";
+    public static const  PRESENTATION_STOPPED:String = "PRESENTATION_STOPPED";
     public static const DIA_CHANGED:String = "DIA_CHANGED";
     public static const THUMB_CHANGED:String = "THUMB_CHANGED";
     public static const STAGE_RESIZE:String = "STAGE_RESIZE";

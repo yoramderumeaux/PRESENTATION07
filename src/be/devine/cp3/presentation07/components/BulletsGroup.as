@@ -13,7 +13,7 @@ public class BulletsGroup extends Sprite{
         var yPos:int = 0;
 
         for each(var tekst:String in items){
-            var tekstVeld:TextField = new TextField(750,300,tekst,fontName,fontSize,uint(color));
+            var tekstVeld:TextField = new TextField(750,500,"×  " + tekst,fontName,fontSize,uint(color));
             tekstVeld.hAlign = HAlign.LEFT;
             tekstVeld.vAlign = VAlign.TOP;
             tekstVeld.y = yPos;
