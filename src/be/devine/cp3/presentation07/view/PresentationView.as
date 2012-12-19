@@ -140,7 +140,6 @@ public class PresentationView extends Sprite{
             }
         }
         restOfDia();
-
     }
 
     private function restOfDia():void{
@@ -252,12 +251,10 @@ public class PresentationView extends Sprite{
             transitionMaskArray.push(transitionsMasker);
             transitionMaskArray.push(maskedDisplayObject);
         }
-        trace("removedinges + lengte :" +transitionMaskArray.length);
         tween.onComplete = clearPreviousDia;
     }
 
     private function clearPreviousDia():void{
-        trace(diaImageArray.length);
         if(diaImageArray.length >= 2){
 
             var deleteDiaTexture = textureArray.shift();
@@ -271,7 +268,6 @@ public class PresentationView extends Sprite{
             removeChild(diaImageData);
 
             if(transitionMaskArray.length >= 3){
-                trace('[clearTransiton]: ' +transitionMaskArray);
                 var deleteQuad = transitionMaskArray.shift();
                 var deletMask = transitionMaskArray.shift();
 
@@ -282,7 +278,6 @@ public class PresentationView extends Sprite{
                 var maskData:PixelMaskDisplayObject = deletMask as PixelMaskDisplayObject;
                 maskData.dispose();
                 removeChild(maskData);
-                trace('[clearTransiton2]: ' +transitionMaskArray);
             }
         }
 

@@ -179,6 +179,9 @@ public class ThumbnailView extends Sprite{
         pageContainer.x = (appModel.appWidth >> 1) - (pageContainer.width >> 1);
         thumbContainer.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
         mask.x = (appModel.appWidth >> 1) - (thumbContainer.width >> 2);
+        maskedDisplayObject.removeChild(thumbContainer);
+        maskedDisplayObject.addChild(thumbContainer);
+        maskedDisplayObject.mask = mask;
         //mask.y = thumbContainer.y;
         //maskedDisplayObject.x = (appModel.appWidth >> 1) - (maskedDisplayObject.width >> 2);
        // thumbContainer.x = (background.width - (4*thumb.width)) / 2;
